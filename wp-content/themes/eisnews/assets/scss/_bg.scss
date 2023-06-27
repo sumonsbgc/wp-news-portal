@@ -1,0 +1,54 @@
+
+.bg_black{
+    background-color: $black !important;
+}
+.bg_tile{
+    background-color: $tile !important;
+}
+.bg_red{
+    background-color: $red !important;
+}
+.bg_secondary_red{
+    background-color: $secondary_red !important;
+}
+
+.bg_green{
+    background-color: $green !important;
+}
+
+.filter_green_bg{
+    background-color: $tab_bg_green !important;
+}
+
+.filter_yellow_bg{
+    background-color: $tab_bg_yellow !important;
+}
+
+.filter_pink_bg{
+    background-color: $tab_bg_pink !important;
+}
+
+/**
+    Border Class
+**/
+
+
+.bd_tile{
+    border-color: $tile !important;
+}
+.bd_red{
+    border-color: $red !important;
+}
+.bd_green{
+    border-color: $green !important;
+}
+
+.bd_top_pink{
+    border-top: 2px solid $tab_bg_pink;
+}
+.bd_top_green{
+    border-top: 2px solid $tab_bg_green;
+}
+.bd_top_yellow{
+    border-top: 2px solid $tab_bg_yellow;
+}

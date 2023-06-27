@@ -1,0 +1,57 @@
+@font-face {font-family: 'SolaimanLipi'; src: local('SolaimanLipi'), url(../css/solaimanlipi_normal.woff) format('woff');}
+@font-face {font-family: 'GangaSagarMJ'; src: local('GangaSagarMJ'), url(../css/GangaSagarMJ.woff) format('woff');}
+@font-face {font-family: 'Yanone Kaffeesatz'; src: local('Yanone Kaffeesatz Regular'), url(../css/Yanone.woff) format('woff');}
+@font-face {font-family: 'Courgette';  src: local('Courgette'), url(../css/Courgette.woff) format('woff');}
+@font-face {font-family: 'SutonnyMJ';  src: local('SutonnyMJ'), url(../css/SUTOM.woff) format('woff');}
+
+.input-bijoy{
+	font-family: SutonnyMJ!important;
+	font-size: 24px!important;
+	min-height: 220px!important;
+	background-color: floralwhite !important;
+}
+textarea::placeholder{
+	font-family: SolaimanLipi!important;
+
+}
+
+.u2b-label{
+	font-size: 20px!important;
+}
+
+.input-unicode{
+	font-family: SolaimanLipi!important;
+	font-size: 24px!important;
+	min-height: 220px!important;
+	background-color: floralwhite !important;
+}
+
+.convert-button-area .btn{
+	font-size: 18px!important;
+	padding: 8px 10px !important;
+	font-family: SolaimanLipi!important;
+	font-weight: 500;
+
+}
+.convert-button-area{
+	font-family: SolaimanLipi!important;
+	padding-top:15px;
+	padding-bottom: 15px;
+}
+.logo-top, .logo-top h2{
+	font-family: SolaimanLipi!important;
+}
+
+p.text-center.copyright-c, .logo-top p {
+    font-family: 'SolaimanLipi';
+    font-size: 20px;
+    font-weight: 650;
+}
+
+.converter-form {
+    border: 2px solid;
+    border-radius: 10px;
+    padding: 30px;
+    border-color: #308a56;
+    background: white;
+}
