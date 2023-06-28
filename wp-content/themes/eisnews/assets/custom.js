@@ -9,7 +9,7 @@
             var _nonce = $(this).data("nonce");
             
             $("#" + _target).addClass("active").siblings().removeClass("active");
-            console.log(eis_ajax.url, eis_ajax.nonce, _nonce, ajaxurl);
+            console.log(eis_ajax.url, eis_ajax.nonce, _nonce, eis_ajax);
 
             $.ajax({
                 url: eis_ajax.url,
