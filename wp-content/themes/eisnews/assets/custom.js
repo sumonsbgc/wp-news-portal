@@ -9,14 +9,15 @@
             var _nonce = $(this).data("nonce");
             
             $("#" + _target).addClass("active").siblings().removeClass("active");
-            console.log(eis_ajax.url, eis_ajax.nonce);
+            console.log(eis_ajax.url, eis_ajax.nonce, _nonce, ajaxurl);
+
             $.ajax({
-                url: ajaxurl,
+                url: eis_ajax.url,
                 type: "POST",
                 data: {
                     action: "tabnews",
                     category: _filter,
-                    nonce: _nonce,
+                    nonce: _nonce || eis_ajax.nonce,
                 },
                 beforeSend: function () {
                     $("#" + _target).empty().html("Loading.....");
