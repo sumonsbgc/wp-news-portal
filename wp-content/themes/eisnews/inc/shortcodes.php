@@ -39,7 +39,7 @@ function display_tabnews()
             wp_send_json_error('Invalid nonce');
         }
         // check_ajax_referer($_POST["action"]);
-        check_ajax_referer('tabnews', 'tabnews');
+        check_ajax_referer('tabnews', 'nonce');
         $category = $_POST['category'];
 
         $q = new WP_Query([
