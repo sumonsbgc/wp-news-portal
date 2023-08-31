@@ -15,7 +15,9 @@
         <div class="large_news_meta">
             <?php
             echo sprintf('<span class="date"><i class="far fa-clock"></i> %s </span>', get_the_date('M j, Y'));
-            echo sprintf('<span class="cat">%s</span>', the_category(' '));
+            echo sprintf('<span class="cat">');
+            the_category(' ');
+            echo sprintf('</span>');
             ?>
         </div>
     </div>

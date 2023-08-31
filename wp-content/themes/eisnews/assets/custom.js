@@ -4,12 +4,9 @@
     $(document).ready(function () {
         $(".link").on("click", function (e) {
             e.preventDefault();
-            var _target = $(this).data("target");
             var _filter = $(this).data("filter");
-            var _nonce = $(this).data("nonce");
-            
-            $("#" + _target).addClass("active").siblings().removeClass("active");
-            console.log(eis_ajax.url, eis_ajax.nonce, _nonce, eis_ajax);
+            $(this).addClass('active').parent().siblings().find('a').removeClass('active');
+            $("#" + _filter).addClass("active").siblings().removeClass("active");
 
             $.ajax({
                 url: eis_ajax.url,
@@ -17,13 +14,13 @@
                 data: {
                     action: "tabnews",
                     category: _filter,
-                    nonce: _nonce || eis_ajax.nonce,
+                    nonce: eis_ajax.nonce,
                 },
                 beforeSend: function () {
-                    $("#" + _target).empty().html("Loading.....");
+                    $("#" + _filter).empty().html("Loading.....");
                 },
                 success: function (res) {
-                    $("#" + _target).empty().html(res.data);
+                    $("#" + _filter).empty().html(res.data);
                 },
                 error: function (err) {
                     console.log(err);

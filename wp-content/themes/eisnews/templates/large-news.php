@@ -24,9 +24,7 @@
                     '<span class="date"><i class="far fa-clock"></i> %s </span>',
                     get_the_date('M j, Y')
                 );
-                printf('<span class="cat">');
-                the_category(' ');
-                printf('</span>');
+                printf('<span class="cat">%s</span>', the_category(' '));
                 ?>
             </div>
         </div>

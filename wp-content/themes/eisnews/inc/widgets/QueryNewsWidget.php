@@ -23,44 +23,31 @@ class QueryNewsWidget extends WP_Widget
 
     public function form($instance)
     {
-        // $selected_category = ! empty( $instance['category'] ) ? $instance['category'] : '';
-        // $template = ! empty( $instance['template'] ) ? $instance['template'] : '';    
-        // Output the form HTML
-        if (!isset($instance['category']) && empty($instance['category'])) {
-            $selected_category = "main-news";
-        } else {
-            $selected_category = $instance['category'];
-        }
-
+        $selected_categories = !empty( $instance['categories'] ) ? (array) $instance['categories'] : array();
         if (!isset($instance['template']) && empty($instance['template'])) {
             $template = "col-three";
         } else {
             $template = $instance['template'];
         }
 
-        // printf("<p>");
-        // printf('<label for="%s">%s</label>', esc_attr($this->get_field_id('category')), esc_html("Select Your Category"));
-        // printf(
-        //     '<input class="widefat" type="text" name="%s" id="%s" value="%s">',
-        //     esc_attr($this->get_field_name('category')),
-        //     esc_attr($this->get_field_id('category')),
-        //     esc_attr($category)
-        // );
-        // printf("</p>");
-
         // Retrieve the list of categories
         $categories = get_categories();
         ?>
         <p>
             <label for="<?php echo $this->get_field_id( 'category' ); ?>">Select a Category:</label>
-            <select class="widefat" id="<?php echo $this->get_field_id( 'category' ); ?>" name="<?php echo $this->get_field_name( 'category' ); ?>" multiple>
+            <select class="widefat selectmenu" id="<?php echo $this->get_field_id( 'category' ); ?>" name="<?php echo $this->get_field_name( 'category' ); ?>[]" multiple="multiple" size="5">
                 <?php foreach ( $categories as $category ) : ?>
-                    <option value="<?php echo esc_attr( $category->slug ); ?>" <?php selected( $selected_category, $category->slug ); ?>>
+                    <option value="<?php echo esc_attr( $category->slug ); ?>" <?php selected( in_array( $category->term_id, $selected_categories ), true ); ?>>
                         <?php echo esc_html( $category->name ); ?>
                     </option>
                 <?php endforeach; ?>
             </select>
         </p>
+        <script>
+            jQuery( document ).ready( function($) {
+                $('.selectmenu').selectmenu();
+            });
+        </script>
         <?php
 
         printf("<p>");
@@ -81,17 +68,18 @@ class QueryNewsWidget extends WP_Widget
         $categories = $instance["category"];
         $count = is_array($categories) ? count($categories) : 1;
         $col = 12 / $count;
-        $col = 12;
-        // foreach ($categories as $cat) {
+        // $col = 12;
+        // dd($instance);
+        foreach ($categories as $cat) {
             $q = new WP_Query([
                 "post_type"      => "post",
                 "posts_per_page" => 4,
-                "category_slug" => $instance["category"]
+                "category_slug" => $cat,
             ]);
-            if (1 < $count && 1 !== $count) :
 
+            if (1 < $count && 1 !== $count) :
                 printf('<div class="col-%s">', $col);
-                printf('<div class="row main-news">');
+                printf('<div class="row">');
 
                 printf('<div class="col-12 pb-2 pt-3">');
                 eis_news_section_title($cat, 'section_title', 'bg_black');
@@ -113,7 +101,7 @@ class QueryNewsWidget extends WP_Widget
                     get_template_part('templates/col-three');
                 }
             endif;
-        // }
+        }
     }
 }
 

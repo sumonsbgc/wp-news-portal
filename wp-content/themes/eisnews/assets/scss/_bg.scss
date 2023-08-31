@@ -1,37 +1,35 @@
-
 .bg_black{
     background-color: $black !important;
+    color: $white !important;
 }
 .bg_tile{
     background-color: $tile !important;
+    color: $white !important;
 }
 .bg_red{
     background-color: $red !important;
+    color: $white !important;
 }
 .bg_secondary_red{
     background-color: $secondary_red !important;
+    color: $white !important;
 }
-
 .bg_green{
     background-color: $green !important;
+    color: $white !important;
 }
-
-.filter_green_bg{
-    background-color: $tab_bg_green !important;
+.bg_yellow{
+    background-color: $yellow !important;
+    color: $white !important;
 }
-
-.filter_yellow_bg{
-    background-color: $tab_bg_yellow !important;
-}
-
-.filter_pink_bg{
-    background-color: $tab_bg_pink !important;
+.bg_pink{
+    background-color: $pink !important;
+    color: $white !important;
 }
 
 /**
     Border Class
 **/
-
 
 .bd_tile{
     border-color: $tile !important;
@@ -44,11 +42,11 @@
 }
 
 .bd_top_pink{
-    border-top: 2px solid $tab_bg_pink;
+    border-top: 2px solid $pink;
 }
 .bd_top_green{
-    border-top: 2px solid $tab_bg_green;
+    border-top: 2px solid $green;
 }
 .bd_top_yellow{
-    border-top: 2px solid $tab_bg_yellow;
+    border-top: 2px solid $yellow;
 }
