@@ -97,6 +97,41 @@ function delete_cache()
 add_action("save_post", "delete_cache");
 add_action("delete_post", "delete_cache");
 
+
+// Add custom fields below the title and above the content editor
+function add_custom_fields_to_editor() {
+    global $post;
+
+    // Subheading 1
+    $subheading_1 = get_post_meta($post->ID, 'subheading_1', true);
+    echo '<label for="subheading_1">Subheading 1:</label>';
+    echo '<input type="text" name="subheading_1" id="subheading_1" value="' . esc_attr($subheading_1) . '" class="widefat">';
+
+    // Subheading 2
+    $subheading_2 = get_post_meta($post->ID, 'subheading_2', true);
+    echo '<label for="subheading_2">Subheading 2:</label>';
+    echo '<input type="text" name="subheading_2" id="subheading_2" value="' . esc_attr($subheading_2) . '" class="widefat">';
+}
+
+add_action('edit_form_after_title', 'add_custom_fields_to_editor');
+
+// Save custom meta box data when the post is saved
+function save_custom_meta_boxes($post_id) {
+    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return;
+
+    if (isset($_POST['subheading_1'])) {
+        update_post_meta($post_id, 'subheading_1', sanitize_text_field($_POST['subheading_1']));
+    }
+
+    if (isset($_POST['subheading_2'])) {
+        update_post_meta($post_id, 'subheading_2', sanitize_text_field($_POST['subheading_2']));
+    }
+}
+
+add_action('save_post', 'save_custom_meta_boxes');
+
+
+
 function eis_widget_register()
 {
     register_sidebar(array(
