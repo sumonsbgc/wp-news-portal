@@ -1,0 +1,218 @@
+/*
+Theme Name: EIS Theme
+Theme URI: https://github.com/sumonsbgc/nils
+Author: Mohammad Sumon
+Author URI: https://github.com/sumonsbgc
+Description: 
+Version: 1.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Tags: blog, one-column, two-columns, right-sidebar, custom-background, custom-header, custom-menu, editor-style, featured-images, flexible-header, footer-widgets, full-width-template, microformats, post-formats, rtl-language-support, sticky-post, theme-options, translation-ready, Court, Bangladesh, Law, Legislature
+Text Domain: eis
+*/
+
+:root {
+  --body-bg-color: #f5f6f7;
+  --black: #222222;
+  --tile: #5e8597;
+  --green: #00a550;
+  --white: #ffffff;
+  --blue: #1b75bb;
+  --yellow: #fbaf3f;
+  --pink: #ec008b;
+  --red: #b51a1a;
+  --secondary_red: #ff4444;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+ul,li{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+a, a:hover{
+  text-decoration: none !important;
+  display: block;
+  color: #000;
+}
+
+.clip {
+  -webkit-clip-path: polygon(0% 0%, 100% 0, 80% 100%, 0% 100%);
+  clip-path: polygon(0% 0%, 100% 0, 80% 100%, 0% 100%);
+}
+
+body {
+  background-color: var(--body-bg-color);
+  font-family: 'kalpurush';
+  transition: all .45s linear;
+}
+
+.wrapper {
+  width: 86%;
+  max-width: 1170px;
+  margin: 0 auto;
+  background-color: #fff;
+  box-shadow: 0 0 5px 0 rgba(0, 0, 0, .12);
+  border: 1px solid rgba(0, 0, 0, .12);
+  padding: 0 .5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.headerTopBar {
+  border-top: 2px solid #009688;
+  border-bottom: 1px solid #e9e9e9;
+  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.12);
+  -webkit-box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.12);
+  -moz-box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.12);
+  background-color: #f9f9f9;
+  padding: 3px 0px;
+}
+
+.old-site{
+  position: relative;
+  margin-right: 5px;
+}
+
+.old-site::after{
+  content: "|";
+  display: inline-block;
+  top: -2px;
+  position: absolute;
+  margin-left: 5px;
+}
+
+.ad_price{
+  margin-left: 5px;
+}
+
+.top_social_bar{
+  display: flex;
+  list-style-type: none;
+  justify-content: flex-end;
+  margin: 0;
+  padding: 0;
+}
+.top_social_bar li{
+  width: 26px;
+  height: 26px;
+  margin-left: 6px;
+}
+
+.top_social_bar li a{
+  width: 100%;
+}
+
+.top_social_bar li a img{
+  width: 100%;
+  max-width: 100%;
+  vertical-align: middle;
+}
+
+.logo_area .custom-logo-link {
+  line-height: 90px;
+}
+
+.breaking_news {
+  background-color: #333;
+  height: 35px;
+}
+
+.breaking_news::after {
+  content: "";
+  clear: both;
+  display: block;
+}
+
+.headline {
+  width: 90px;
+  background-color: #bd2124;
+  -webkit-clip-path: polygon(0% 0%, 75% 0%, 100% 50%, 75% 100%, 0% 100%);
+  clip-path: polygon(0% 0%, 75% 0%, 100% 50%, 75% 100%, 0% 100%);
+  color: #fff;
+  height: 35px;
+  float: left;
+  line-height: 35px;
+  margin-left: -15px;
+  padding-left: 15px;
+}
+
+#news-ticker-wrap {
+  float: left;
+  height: 100%;
+}
+
+#news-ticker-wrap li a {
+  color: #fff;
+  font-size: 14px;
+  line-height: 35px;
+}
+
+#news-ticker-wrap li a i {
+  color: #fff;
+}
+
+.navarea .nav_container {
+  width: 100%;
+  border: 1px solid #19232d;
+  border-bottom: 2px solid #19232d;
+}
+
+.nav_container .menu_container {
+  display: flex;
+  position: relative;
+}
+
+.nav_container .menu_container li {
+  border-right: 1px solid #19232d;
+  flex-grow: 1;
+}
+
+.nav_container .menu_container li:last-child {
+  border-right: none;
+}
+
+.nav_container .menu_container li a {
+  color: #000;
+  font-size: 17px;
+  display: block;
+  padding: 5px 8px;
+  transition: all 0.45s linear;
+}
+
+.nav_container .menu_container li a:hover,
+.nav_container .menu_container .current-menu-item a {
+  color: #fff;
+  background-color: #19232d;
+  transition: all 0.45s linear;
+}
+
+.nav_container .menu_container li .sub-menu {
+  position: absolute;
+  top: 37px;
+  left: 0px;
+  z-index: 11;
+  width: 100%;
+  background-color: #fff;
+  display: none;
+  padding: 30px 20px;
+  box-shadow: 1px 1px 16px 0px #eee;
+  border-radius: 6px;
+  border-top-right-radius: 0px;
+  border-top-left-radius: 0px;
+}
+
+.nav_container .menu_container li .sub-menu li {
+  flex-grow: 0;
+  flex-basis: 110px;
+  border: none;
+}
+
+.nav_container .menu_container li:hover .sub-menu {
+  display: flex;
+}

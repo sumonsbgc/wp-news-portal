@@ -1,4 +1,7 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 require_once 'inc/functions.php';
 require_once 'inc/shortcodes.php';
 require_once 'inc/theme_options/EIS_Theme_Options.php';
@@ -44,7 +47,7 @@ function integrate_assets()
     wp_enqueue_style('main_css', get_theme_file_uri('style.css'), null, VERSION, "all");
     wp_enqueue_script('propper', '//cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js', array('jquery'), '1.0', true);
     wp_enqueue_script('breaking_news', get_theme_file_uri('assets/js/jquery.webticker.min.js'), array('jquery'), '1.0', true);
-    wp_enqueue_script('custom-js', get_theme_file_uri('assets/custom.js'), array('jquery'), VERSION, true);
+    wp_enqueue_script('custom-js', get_theme_file_uri('assets/js/custom.js'), array('jquery'), VERSION, true);
     wp_localize_script('custom-js', 'eis_ajax', ['url' => admin_url('admin-ajax.php'), 'nonce' => wp_create_nonce('tabnews')]);
 }
 add_action('wp_enqueue_scripts', 'integrate_assets');

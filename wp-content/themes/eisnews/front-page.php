@@ -1,6 +1,6 @@
 <?php get_header(); ?>
 
-<div class="row content_area">
+<div class="row content_area bg-black">
     <div class="col-9 border-right">
         <div class="row" id="main_news">
             <div class="col-12 py-2">

@@ -13,12 +13,14 @@ function news_ticker($attr, $content)
         );
         set_transient('breaking_news', $breaking_news, DAY_IN_SECONDS);
     endif;
-
     $html = '<ul id="news-ticker-wrap">';
     while ($breaking_news->have_posts()) {
         $breaking_news->the_post();
         $html .= sprintf(
-            '<li><a><i class="fas fa-angle-double-right"></i> %s</a></li>',
+            '<li class=""><a class="flex items-center text-black font-normal text-base font-kalpurush">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5" />
+            </svg>%s</a></li>',
             get_the_title()
         );
     }
