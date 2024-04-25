@@ -23,7 +23,7 @@ define('IMAGE_EDIT_OVERWRITE', true);
 
 define('WP_POST_REVISIONS', 0);
 
-define('WP_CACHE', true);
+
 
 define('DISABLE_WP_CRON', true);
 

@@ -2,11 +2,15 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
+// if (wp_is_mobile()) {
+//     header('Location: http://m.eisnews.test');
+//     exit;
+// }
+
+require_once 'inc/helpers.php';
 require_once 'inc/functions.php';
 require_once 'inc/shortcodes.php';
 require_once 'inc/theme_options/EIS_Theme_Options.php';
-require_once 'inc/widgets/QueryNewsWidget.php';
-require_once 'inc/widgets/MainNewsWidget.php';
 
 define("VERSION", time());
 
@@ -45,18 +49,18 @@ add_action("after_setup_theme", "init_theme");
 function integrate_assets()
 {
     wp_enqueue_style('main_css', get_theme_file_uri('style.css'), null, VERSION, "all");
-    wp_enqueue_script('propper', '//cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js', array('jquery'), '1.0', true);
     wp_enqueue_script('breaking_news', get_theme_file_uri('assets/js/jquery.webticker.min.js'), array('jquery'), '1.0', true);
     wp_enqueue_script('custom-js', get_theme_file_uri('assets/js/custom.js'), array('jquery'), VERSION, true);
     wp_localize_script('custom-js', 'eis_ajax', ['url' => admin_url('admin-ajax.php'), 'nonce' => wp_create_nonce('tabnews')]);
 }
 add_action('wp_enqueue_scripts', 'integrate_assets');
 
-function enqueue_select2() {
-    wp_enqueue_script( 'select2', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js', array( 'jquery' ), '4.0.13', true );
-    wp_enqueue_style( 'select2', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css', array(), '4.0.13' );
-}
-add_action( 'admin_enqueue_scripts', 'enqueue_select2' );
+// function enqueue_select2()
+// {
+//     wp_enqueue_script('select2', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js', array('jquery'), '4.0.13', true);
+//     wp_enqueue_style('select2', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css', array(), '4.0.13');
+// }
+// add_action('admin_enqueue_scripts', 'enqueue_select2');
 
 function modify_excerpt_length($length)
 {
@@ -91,18 +95,58 @@ add_action("pre_get_posts", function ($query) {
     }
 });
 
-function delete_cache()
+function delete_cache($post_id)
 {
-    delete_transient('breaking_news');
-    delete_transient('eis_header_menu');
+    wp_cache_delete('breaking_news');
+    wp_cache_delete('sports');
+    $cats = get_the_category($post_id);
+    foreach ($cats as $cat) {
+        switch ($cat->slug) {
+            case 'main-news':
+                wp_cache_delete('main_news');
+                break;
+            case 'chattogram':
+                wp_cache_delete('chattogram');
+                break;
+            case 'national':
+                wp_cache_delete('national');
+                break;
+            case 'international':
+                wp_cache_delete('international');
+                break;
+            case 'finance-trade':
+                wp_cache_delete('finance-trade');
+                break;
+            case 'finance-trade':
+                wp_cache_delete('finance-trade');
+                break;
+            case 'zila-upazila-gram':
+                wp_cache_delete('zila-upazila-gram');
+                break;
+            case 'sports':
+                wp_cache_delete('sports');
+                break;
+            default:
+                return null;
+        }
+    }
 }
-
-add_action("save_post", "delete_cache");
+add_action("save_post", "delete_cache", 10, 1);
 add_action("delete_post", "delete_cache");
+
+function remove_sticky_from_other_posts($post_id)
+{
+    if (is_admin() && current_user_can('edit_posts') && isset($_POST['sticky']) && $_POST['sticky'] === 'sticky') {
+        update_option('sticky_posts', array($post_id));
+    }
+}
+add_action("save_post", "remove_sticky_from_other_posts", 9, 1);
+
 
 
 // Add custom fields below the title and above the content editor
-function add_custom_fields_to_editor() {
+function add_custom_fields_to_editor()
+{
     global $post;
 
     // Subheading 1
@@ -119,7 +163,8 @@ function add_custom_fields_to_editor() {
 add_action('edit_form_after_title', 'add_custom_fields_to_editor');
 
 // Save custom meta box data when the post is saved
-function save_custom_meta_boxes($post_id) {
+function save_custom_meta_boxes($post_id)
+{
     if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return;
 
     if (isset($_POST['subheading_1'])) {

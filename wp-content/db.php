@@ -1,0 +1,1 @@
+/var/www/html/wp/wp-news-portal/wp-content/plugins/query-monitor/wp-content/db.php

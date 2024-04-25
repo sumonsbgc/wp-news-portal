@@ -106,7 +106,7 @@ function eis_main_news_content($atts, $content)
             "update_post_term_cache" => false,
             "orderby" => "date",
             "order" => "DSC",
-            "fields" => "ids",            
+            "fields" => "ids",
             "meta_query" => array(
                 array(
                     "key"     => "_dpkone_post_type",
