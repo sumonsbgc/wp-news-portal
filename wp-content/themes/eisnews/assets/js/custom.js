@@ -13,6 +13,7 @@ window.addEventListener("load", function () {
 		});
 
 		sticky_header();
+		
 		filterNews("literature-and-culture", "bg-pink", "border-pink");
 
 		function sticky_header() {

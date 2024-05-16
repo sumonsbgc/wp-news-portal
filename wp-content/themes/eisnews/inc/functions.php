@@ -187,31 +187,12 @@ function get_three_cols_news()
 || Query and Cache Tab News data;
 =======================================================
 */
-function display_tab_news(string $slug)
+function display_tab_news(array $filter_tab_list)
 {
-  $filters_list_one = [
-    [
-      'name' => 'সাহিত্য ও সংস্কৃতি',
-      'slug' => 'literature-and-culture',
-      'bg_color' => 'bg-pink',
-      'border_color' => 'border-pink'
-    ],
-    [
-      'name' => 'সম্পাদকীয়',
-      'slug' => 'editorial',
-      'bg_color' => 'bg-yellow',
-      'border_color' => 'border-yellow',
-    ],
-    [
-      'name' => 'উপ-সম্পাদকীয়',
-      'slug' => 'op-editorial',
-      'bg_color' => 'bg-green',
-      'border_color' => 'border-green'
-    ],
-  ];
+  $filter_list = $filter_tab_list;
 
   $filters = '<ul class="flex ml-4">';
-  foreach ($filters_list_one as $filter) {
+  foreach ($filter_list as $filter) {
     $filters .= sprintf(
       '<li>
           <a href="javascript:void" class="link px-[10px] py-[7px] flex" data-filter="%2$s" data-bg="%3$s" data-border="%4$s">%1$s</a>
@@ -230,6 +211,100 @@ function display_tab_news(string $slug)
       <div class="tab_content px-2 py-2 grid gap-4 grid-cols-4 grid-rows-2 border-y-2"></div>
     </div>
   </div>';
-
   return $html;
 }
+
+function tab_news(array $filter_tab_list, string $cache_key)
+{
+  $filter_list = wp_cache_get($cache_key);
+
+  if (!$filter_list) {
+    $tabs = $filter_tab_list;
+
+    $filters = '<ul class="flex ml-4">';
+    foreach ($tabs as $tab) {
+      $filters .= sprintf(
+        '<li>
+            <a href="javascript:void" class="link px-[10px] py-[7px] flex" data-filter="%2$s" data-bg="%3$s" data-border="%4$s">%1$s</a>
+          </li>',
+        $tab['name'],
+        $tab['slug'],
+        $tab['bg_color'],
+        $tab['border_color'],
+      );
+    }
+    $filters .= '</ul>';
+
+    $html = '<div class="relative my-6">';
+    $html .= $filters;
+    $html .=  '<div class="bg-gray-light relative">
+        <div class="tab_content px-2 py-2 grid gap-4 grid-cols-4 grid-rows-2 border-y-2"></div>
+      </div>
+    </div>';
+    wp_cache_add($cache_key, $html);
+    return $html;
+  } else {
+    return $filter_list;
+  }
+}
+
+function create_ajax_tabs($filters = [])
+{
+  // echo '<pre>';
+  // print_r($filters);
+  // echo '</pre>';
+
+  if (empty($filters)) {
+    return; // Handle empty categories case
+  }
+
+  $active_tab = isset($_GET['tab']) ? sanitize_text_field($_GET['tab']) : $filters[0]['slug'];
+
+  wp_enqueue_script('ajax-tabs-script', get_template_directory_uri() . '/src/js/ajax-tab.js', array('jquery'), '1.0.0', true);
+  wp_enqueue_style('ajax-tabs-style', get_template_directory_uri() . '/src/tab.css');
+
+  $output = '<div class="flex flex-col">';
+  $output .= '<ul class="flex ml-4 tabs-filter">';
+
+  foreach ($filters as $filter) {
+    $class = ($filter['slug'] === $active_tab) ? $filter['bg_color'] . ' ' . 'text-white' : 'bg-gray-200 text-black-primary';
+    $href= add_query_arg('tab', $filter['slug'], get_permalink());
+    $output .= sprintf('<li class="border border-gray-100 %1$s" data-tab="%2$s" data-active="%4$s" data-bg="%5$s">%3$s</li>', $class, $filter['slug'], $filter['name'], $filter['bg_color'], $filter['default_bg']);
+  }
+
+  $output .= '</ul>';
+
+  $output .= '<div class="ajax-tabs-content bg-gray-light p-2">';
+  $output .= '<div class="tab-content active" data-tab="' . $active_tab . '">' . do_shortcode('[tab_news_shortcode category="' . $active_tab . '"]') . '</div>';
+
+  foreach ($filters as $filter) {
+    if ($filter['slug'] !== $active_tab) {
+      $output .= '<div class="tab-content hidden" data-tab="' . $filter['slug'] . '"></div>';
+    }
+  }
+
+  $output .= '</div>';
+  $output .= '</div>';
+
+  // Pass data to the JavaScript using wp_localize_script
+  wp_localize_script('ajax-tabs-script', 'ajaxTabData', array(
+    'ajaxUrl'     => admin_url('admin-ajax.php'),
+    'activeTab'   => $active_tab,
+    'categories'  => $filters,
+    'nonce' => wp_create_nonce('tabnews')
+  ));
+
+  return $output;
+}
+
+// add_shortcode('ajax_tabs', 'create_ajax_tabs');
+
+function get_category_news($atts)
+{
+  $category = isset($atts['category']) ? sanitize_text_field($atts['category']) : '';
+  // dd($category);
+  // Implement your logic to fetch news based on $category
+  $news_html = '';
+  return $news_html;
+}
+add_shortcode('tab_news_shortcode', 'get_category_news');

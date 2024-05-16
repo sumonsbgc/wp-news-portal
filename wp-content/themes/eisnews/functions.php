@@ -1,18 +1,14 @@
 <?php
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-
-// if (wp_is_mobile()) {
-//     header('Location: http://m.eisnews.test');
-//     exit;
-// }
+date_default_timezone_set('Asia/Dhaka');
+define("VERSION", time());
 
 require_once 'inc/helpers.php';
+require_once 'inc/tab_news.php';
 require_once 'inc/functions.php';
 require_once 'inc/shortcodes.php';
 require_once 'inc/theme_options/EIS_Theme_Options.php';
-
-define("VERSION", time());
 
 function register_menu()
 {
@@ -54,13 +50,6 @@ function integrate_assets()
     wp_localize_script('custom-js', 'eis_ajax', ['url' => admin_url('admin-ajax.php'), 'nonce' => wp_create_nonce('tabnews')]);
 }
 add_action('wp_enqueue_scripts', 'integrate_assets');
-
-// function enqueue_select2()
-// {
-//     wp_enqueue_script('select2', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js', array('jquery'), '4.0.13', true);
-//     wp_enqueue_style('select2', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css', array(), '4.0.13');
-// }
-// add_action('admin_enqueue_scripts', 'enqueue_select2');
 
 function modify_excerpt_length($length)
 {
@@ -142,8 +131,6 @@ function remove_sticky_from_other_posts($post_id)
 }
 add_action("save_post", "remove_sticky_from_other_posts", 9, 1);
 
-
-
 // Add custom fields below the title and above the content editor
 function add_custom_fields_to_editor()
 {
@@ -159,10 +146,8 @@ function add_custom_fields_to_editor()
     echo '<label for="subheading_2">Subheading 2:</label>';
     echo '<input type="text" name="subheading_2" id="subheading_2" value="' . esc_attr($subheading_2) . '" class="widefat">';
 }
-
 add_action('edit_form_after_title', 'add_custom_fields_to_editor');
 
-// Save custom meta box data when the post is saved
 function save_custom_meta_boxes($post_id)
 {
     if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return;
@@ -175,41 +160,4 @@ function save_custom_meta_boxes($post_id)
         update_post_meta($post_id, 'subheading_2', sanitize_text_field($_POST['subheading_2']));
     }
 }
-
 add_action('save_post', 'save_custom_meta_boxes');
-
-
-
-function eis_widget_register()
-{
-    register_sidebar(array(
-        'name'          => __('Main News', 'eis'),
-        'id'            => 'main-news',
-        'description'   => __('Widgets in this area will be shown on all posts and pages.', 'eis'),
-        'before_widget' => '<li id="%1$s" class="widget %2$s">',
-        'after_widget'  => '</li>',
-        'before_title'  => '<h2 class="widgettitle">',
-        'after_title'   => '</h2>',
-    ));
-
-    register_sidebar(array(
-        'name'          => __('One Column News', 'eis'),
-        'id'            => 'one-column-news',
-        'description'   => __('Widgets in this area will be shown on all posts and pages.', 'eis'),
-        'before_widget' => '<li id="%1$s" class="widget %2$s">',
-        'after_widget'  => '</li>',
-        'before_title'  => '<h2 class="widgettitle">',
-        'after_title'   => '</h2>',
-    ));
-
-    register_sidebar(array(
-        'name'          => __('Two Column News', 'eis'),
-        'id'            => 'two-column-news',
-        'description'   => __('Widgets in this area will be shown on all posts and pages.', 'eis'),
-        'before_widget' => '<li id="%1$s" class="widget %2$s">',
-        'after_widget'  => '</li>',
-        'before_title'  => '<h2 class="widgettitle">',
-        'after_title'   => '</h2>',
-    ));
-}
-add_action('widgets_init', 'eis_widget_register');

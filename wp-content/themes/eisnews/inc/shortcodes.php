@@ -35,11 +35,6 @@ function get_two_cats_news($attr, $content)
 add_shortcode('two_cat_news', 'get_two_cats_news');
 
 
-/**
- * Retrieves and displays news posts from a specific category.
- *
- * @return void
- */
 // function display_tabnews()
 // {
 //   if (!isset($_POST["action"])) {
