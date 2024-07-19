@@ -32,21 +32,21 @@ function get_tab_two_data()
         'name' => 'প্রবাস',
         'slug' => 'emigrant',
         'default_bg' => 'bg-gray-200',
-        'bg_color' => 'bg-yellow',
+        'bg_color' => 'yellow-bg',
         'border_color' => 'border-yellow',
       ],
       [
         'name' => 'আবহাওয়া',
         'slug' => 'weather',
         'default_bg' => 'bg-gray-200',
-        'bg_color' => 'bg-green',
+        'bg_color' => 'green-bg',
         'border_color' => 'border-green'
       ],
       [
         'name' => 'চাকরি',
         'slug' => 'job',
         'default_bg' => 'bg-gray-200',
-        'bg_color' => 'bg-pink',
+        'bg_color' => 'pink-bg',
         'border_color' => 'border-pink'
       ],
     ];

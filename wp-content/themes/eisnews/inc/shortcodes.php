@@ -26,7 +26,7 @@ add_shortcode('two_rows_news', 'get_two_rows_news');
 
 function get_two_cats_news($attr, $content)
 {
-  $html = '<div class="grid grid-cols-2 gap-5">';
+  $html = '<div class="grid md:grid-cols-2 grid-cols-1 gap-4">';
   $html .= do_shortcode($content);
   $html .= '</div>';
 
@@ -34,51 +34,11 @@ function get_two_cats_news($attr, $content)
 }
 add_shortcode('two_cat_news', 'get_two_cats_news');
 
-
-// function display_tabnews()
-// {
-//   if (!isset($_POST["action"])) {
-//     wp_send_json_error("Action not set");
-//   }
-
-//   $nonce = $_POST['nonce'];
-//   $action = $_POST['action'];
-
-//   if (!wp_verify_nonce($nonce, $action)) {
-//     wp_send_json_error('Invalid nonce');
-//     wp_die();
-//   }
-
-//   check_ajax_referer('tabnews', 'nonce');
-
-//   $category = filter_input(INPUT_POST, 'category');
-
-//   $query_args = [
-//     'category_name' => $category,
-//     'posts_per_page' => 5
-//   ];
-
-//   $query = new WP_Query($query_args);
-
-//   $postsHTML = '';
-
-//   if ($query->have_posts()) {
-//     while ($query->have_posts()) {
-//       $query->the_post();
-//       $template = ($query->current_post === 0) ? "templates/tab-large-news" : "templates/tab-news";
-//       $postsHTML .= get_template_part_as_string($template, false);
-//     }
-//     wp_reset_postdata();
-//     $link = eis_get_category_link($category);
-//     $more_link = sprintf('<a href="%s" class="more">আরোও <i class="fas fa-angle-double-right"></i></a>', $link);
-//     $postsHTML .= $more_link;
-//   } else {
-//     $postsHTML = 'No posts found for the selected category.';
-//   }
-
-//   wp_send_json_success($postsHTML);
-//   wp_die();
-// }
+/*
+=======================================================
+|| Tab News Query Through Ajax and Cached;
+=======================================================
+*/
 add_action("wp_ajax_tabnews", "display_tabnews");
 add_action("wp_ajax_nopriv_tabnews", "display_tabnews");
 function display_tabnews()
@@ -128,7 +88,7 @@ function display_tabnews()
     }
     wp_reset_postdata();
     $link = eis_get_category_link($category);
-    $more_link = sprintf('<a href="%s" class="more %s"><span>আরোও</span> %s', $link, $bgColor, get_svg_icon('right-angle'));
+    $more_link = sprintf('<a href="%s" class="more active %s"><span>আরোও</span> %s</a>', $link, $bgColor, get_svg_icon('right-angle'));
     $postsHTML .= $more_link;
   } else {
     $postsHTML = 'No posts found for the selected category.';

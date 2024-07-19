@@ -1,9 +1,7 @@
 <?php get_header(); ?>
-
 <main class="content-area">
   <div class="news-sections">
     <?php echo do_shortcode('[main_news]') ?>
-
     <?php
     echo do_shortcode('
       [two_cat_news]
@@ -24,10 +22,7 @@
 
     <?php echo do_shortcode('[one_row_news slug="sports" bg_color="bg-blue/5" cat_bg_color="bg-blue" border_color="border-b-blue" ]') ?>
 
-    <?php echo display_tab_news(get_tab_one_data()); ?>
-
-    <?php echo create_ajax_tabs(get_tab_two_data(), 'tab_two'); ?>
-
+    <?php echo create_ajax_tabs(get_tab_two_data()); ?>
 
   </div>
   <?php get_sidebar(); ?>
