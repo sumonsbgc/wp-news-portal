@@ -29,9 +29,11 @@ function bddp_ac_int() {
 }
 
 /* * ******************************************************** */
+
 class bddp_ac_widget extends WP_Widget {
 
 	function __construct() {
+
 		parent::__construct(
 			'bddp_ac_widget', // Base ID
 			'Advanced Archive Calendar', // Name
@@ -52,119 +54,132 @@ class bddp_ac_widget extends WP_Widget {
 
 		/* $title define by from */
 		if ($title)
+		/* after title and before title defince by thime */
 			echo $before_title . $title . $after_title;
+		/* end title */
+		/* now start your degine */
 		?>
-      <div id="bddp_ac_widget">
-        <div class="select_ca">
-          <select name="month" id="my_month" >
-            <?php
-            if ('bn' === substr(get_locale(), 0, 2) || $bengali==1) {
-              $month=array(
-                '01'=>'জানুয়ারী',
-                '02'=>'ফেব্রুয়ারী',
-                '03'=>'মার্চ',
-                '04'=>'এপ্রিল',
-                '05'=>'মে',
-                '06'=>'জুন',
-                '07'=>'জুলাই',
-                '08'=>'আগষ্ট',
-                '09'=>'সেপ্টেম্বর',
-                '10'=>'অক্টোবর',
-                '11'=>'নভেম্বর',
-                '12'=>'ডিসেম্বর'
-              );
-            } else{
-              $month = array();
-              for ($i = 1; $i <= 12; $i++) {
-                $monthnums = zeroise($i, 2);
-                $month[$monthnums] = $wp_locale->get_month($i);
-              }
-            }
+		<div id="bddp_ac_widget">
+			<div class="select_ca">
+				<select name="month" id="my_month" >
+					<?php
+					if ('bn' === substr(get_locale(), 0, 2) || $bengali==1) {
+						$month=array(
+							'01'=>'জানুয়ারী',
+							'02'=>'ফেব্রুয়র',
+							'03'=>'মার্',
+							'04'=>'এ্রি',
+							'05'=>'ে',
+							'06'=>'জুন',
+							'07'=>'জুলা',
+							'08'=>'আগষ্',
+							'09'=>'সেপ্টেম্বর',
+							'10'=>'অক্টোবর',
+							'11'=>'নভেম্র',
+							'12'=>'ডিস্বর'
+						);
+					} else{
+						$month = array();
+						for ($i = 1; $i <= 12; $i++) {
+							$monthnums = zeroise($i, 2);
+							$month[$monthnums] = $wp_locale->get_month($i);
+						}
+					}
 
 
-            if (empty($m) || $m == '') {
-              $nowm = $monthnum;
-              $nowyear = $year;
-              if($monthnum==0 || $monthnum==null){
-                $nowm=date('m');
-              }
-              if($nowyear==0 || $nowyear==null){
-                $nowyear=date('Y');
-              }
-            } else {
-              $mmm = str_split($m, 2);
-              $nowm = zeroise(intval(substr($m, 4, 2)), 2);
-              $nowyear = $mmm['0'] . $mmm['1'];
-            }
+					if (empty($m) || $m == '') {
+						$nowm = $monthnum;
+						$nowyear = $year;
+						if($monthnum==0 || $monthnum==null){
+							$nowm=date('m');
+						}
+						if($nowyear==0 || $nowyear==null){
+							$nowyear=date('Y');
+						}
+					} else {
+						$mmm = str_split($m, 2);
+						$nowm = zeroise(intval(substr($m, 4, 2)), 2);
+						$nowyear = $mmm['0'] . $mmm['1'];
+					}
 
 
-            foreach ($month as $k => $mu) {
-              if ($k == $nowm) {
-                echo '<option value="' . $k . '" selected="selected" >' . $mu . '</option>';
-              } else {
-                echo '<option value="' . $k . '">' . $mu . '</option>';
-              }
-            }
-            ?>
-          </select>
-          <?php
-            $find = array("1", "2", "3", "4", "5", "6", "7", "8", "9", "0",);
-            $replace = array("১", "২", "৩", "৪", "৫", "৬", "৭", "৮", "৯", "০",);
+					foreach ($month as $k => $mu) {
+						if ($k == $nowm) {
+							echo '<option value="' . $k . '" selected="selected" >' . $mu . '</option>';
+						} else {
+							echo '<option value="' . $k . '">' . $mu . '</option>';
+						}
+					}
+					?>
+				</select>
 
-            $taryear = date('Y');
-            $yeararr = array();
-            $lassyear = $ac_start_year;
-            for ($nowyearrr = $lassyear; $nowyearrr <= $taryear; $nowyearrr++) {
-              $yeararr[$nowyearrr] = $nowyearrr;
-            }
-          ?>
-          <select name="Year" id="my_year" >
-            <?php
-              foreach ($yeararr as $k => $years) {
-                if ('bn' === substr(get_locale(), 0, 2) || $bengali==1) {
-                  $years = str_replace($find, $replace, $years);
-                }
-                if ($k == $nowyear) {
-                  echo '<option value="' . $k . '" selected="selected" >' . $years . '</option>';
-                } else {
-                  echo '<option value="' . $k . '">' . $years . '</option>';
-                }
-              }
-            ?>
-          </select>
-        </div><!--select ca -->
-        <div class="clear" style="clear:both; margin-bottom: 5px;"></div>
-        <div class="ajax-calendar">
-          <div class="aj-loging" style="left: 49%;position: absolute;top: 50%; display:none">
-            <img src="<?php $url = plugin_dir_url(__FILE__); echo $url . 'loading.gif'; ?>" />
-          </div>
-          <div id="my_calender">
-            <?php bddp_ac_calendar($bengali); ?>
-          </div><!--my_calender -->
-          <div class="clear" style="clear:both; margin-bottom: 5px;"></div>
-        </div>
-        <script type="text/javascript" >
-          jQuery('#my_month,#my_year').change(function (e) {
-            <?php echo 'var bna='.$bengali.';' ?>
-            jQuery(".aj-loging").css("display", "block");
-            jQuery("#my_calender").css("opacity", "0.30");
-            var mon = jQuery('#my_month').val();
-            var year = jQuery('#my_year').val();
-            var to = year + mon;
-            var data = {
-              action: 'bddp_ac',
-              ma: to,
-              bn:bna,
-            };
-            // since 2.8 ajaxurl is always defined in the admin header and points to admin-ajax.php
-            jQuery.get(ajaxurl, data, function (response) {
-              jQuery("#my_calender").html(response);
-              jQuery(".aj-loging").css("display", "none");
-              jQuery("#my_calender").css("opacity", "1.00");
-            });
-          });			
-        </script>
-      </div>
+					<?php
+					$find = array("1", "2", "3", "4", "5", "6", "7", "8", "9", "0",);
+					$replace = array("১", "২", "৩", "৪", "৫", "৬", "৭", "৮", "৯", "০",);
+
+
+					$taryear = date('Y');
+					$yeararr = array();
+					$lassyear = $ac_start_year;
+					for ($nowyearrr = $lassyear; $nowyearrr <= $taryear; $nowyearrr++) {
+						$yeararr[$nowyearrr] = $nowyearrr;
+					}
+				
+					?> 
+
+				<select name="Year" id="my_year" >
+				<?php
+				foreach ($yeararr as $k => $years) {
+					if ('bn' === substr(get_locale(), 0, 2) || $bengali==1) {
+						$years = str_replace($find, $replace, $years);
+					}
+					if ($k == $nowyear) {
+						echo '<option value="' . $k . '" selected="selected" >' . $years . '</option>';
+					} else {
+						echo '<option value="' . $k . '">' . $years . '</option>';
+					}
+				}
+				?>
+
+				</select>
+			</div><!--select ca -->
+			<div class="clear" style="clear:both; margin-bottom: 5px;"></div>
+            <div class="ajax-calendar">
+            <div class="aj-loging" style="left: 49%;position: absolute;top: 50%; display:none"><img src="<?php $url = plugin_dir_url(__FILE__);
+			echo $url . 'loading.gif'; ?>" /></div>
+            
+			<div id="my_calender">
+            	<?php bddp_ac_calendar('', $bengali); ?>
+			</div><!--my_calender -->
+            <div class="clear" style="clear:both; margin-bottom: 5px;"></div>
+			</div>
+			<script type="text/javascript" >
+				jQuery('#my_month,#my_year').change(function (e) {
+					<?php echo 'var bna='.$bengali.';' ?>
+					jQuery(".aj-loging").css("display", "block");
+					jQuery("#my_calender").css("opacity", "0.30");
+					var mon = jQuery('#my_month').val();
+					var year = jQuery('#my_year').val();
+					var to = year + mon;
+					var data = {
+						action: 'bddp_ac',
+						ma: to,
+						bn:bna,
+
+					};
+
+					// since 2.8 ajaxurl is always defined in the admin header and points to admin-ajax.php
+					jQuery.get(ajaxurl, data, function (response) {
+						jQuery("#my_calender").html(response);
+						jQuery(".aj-loging").css("display", "none");
+						jQuery("#my_calender").css("opacity", "1.00");
+					});
+
+				});
+			
+			</script>
+		</div>
+
 		<?php
 		/* now end your degine
 
@@ -204,24 +219,30 @@ class bddp_ac_widget extends WP_Widget {
 		<p>
 			<label for="<?php echo $this->get_field_id('ac_start_year'); ?>"><?php _e('Start Year:', 'ajax_archive_calendar'); ?></label>
 			<input id="<?php echo $this->get_field_id('ac_start_year'); ?>" name="<?php echo $this->get_field_name('ac_start_year'); ?>" value="<?php echo $instance['ac_start_year']; ?>" />
+
 		</p>
+
+
 		<?php
 	}
+
 // end from function
 }
 
 // end widget class
 
+
 add_action('wp_ajax_bddp_ac', 'bddp_ac_callback');
 add_action('wp_ajax_nopriv_bddp_ac', 'bddp_ac_callback');
+
 function bddp_ac_callback() {
 	$ma = $_GET['ma'];
 	$bn = $_GET['bn'];
-	bddp_ac_calendar($bn, $ma);
+	bddp_ac_calendar($ma,$bn);
 	die(); // this is required to return a proper result
 }
 
-function bddp_ac_calendar($bn, $ma=null, $echo = true) {
+function bddp_ac_calendar($ma=null,$bn=1, $echo = true) {
 	global $wpdb, $m, $monthnum, $year, $wp_locale, $posts;
 	if($ma!=null){
 		$m=$ma;
@@ -291,7 +312,7 @@ function bddp_ac_calendar($bn, $ma=null, $echo = true) {
 		$myweek[] = $wp_locale->get_weekday(($wdcount + $week_begins) % 7);
 	}
 
-	$barr = array('Saturday' => 'শনি', 'Sunday' => 'রবি', 'Monday' => 'সোম', 'Tuesday' => 'মঙ্গল', 'Wednesday' => 'বুধ', 'Thursday' => 'বৃহ', 'Friday' => 'শুক্র');
+	$barr = array('Saturday' => 'শনি', 'Sunday' => 'রবি', 'Monday' => 'সোম', 'Tuesday' => 'মঙ্গল', 'Wednesday' => 'বু', 'Thursday' => 'বৃহ', 'Friday' => 'শুক্র');
 	foreach ($myweek as $wd) {
 		if ('bn' === substr(get_locale(), 0, 2) || $bn==1) {
 			$day_name = $barr[$wd];
@@ -353,19 +374,19 @@ function bddp_ac_calendar($bn, $ma=null, $echo = true) {
                 '3' => '৩',
                 '4' => '৪',
                 '5' => '৫',
-                '6' => '৬',
+                '6' => '',
                 '7' => '৭',
                 '8' => '৮',
                 '9' => '৯',
                 '10' => '১০',
                 '11' => '১১',
-                '12' => '১২',
+                '12' => '১',
                 '13' => '১৩',
-                '14' => '১৪',
+                '14' => '৪',
                 '15' => '১৫',
                 '16' => '১৬',
-                '17' => '১৭',
-                '18' => '১৮',
+                '17' => '১',
+                '18' => '৮',
                 '19' => '১৯',
                 '20' => '২০',
                 '21' => '২১',
@@ -375,8 +396,8 @@ function bddp_ac_calendar($bn, $ma=null, $echo = true) {
                 '25' => '২৫',
                 '26' => '২৬',
                 '27' => '২৭',
-                '28' => '২৮',
-                '29' => '২৯',
+                '28' => '২',
+                '29' => '৯',
                 '30' => '৩০',
                 '31' => '৩১',
             );
