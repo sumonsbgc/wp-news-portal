@@ -1,17 +1,17 @@
-document.addEventListener("DOMContentLoaded", function () {
-	document.querySelector(".loader-wrapper").style.display = "flex";
-});
+// document.addEventListener("DOMContentLoaded", function () {
+// 	document.querySelector(".loader-wrapper").style.display = "flex";
+// });
 
 window.addEventListener("load", function () {
 	document.querySelector(".loader-wrapper").style.display = "none";
 });
 
 (function ($) {
-	$(document).ready(function () {
-		$("#news-ticker-wrap").webTicker({
-			height: "100%",
-		});
+	$("#news-ticker-wrap").webTicker({
+		height: "100%",
+	});
 
+	$(document).ready(function () {		
 		sticky_header();
 		
 		filterNews("literature-and-culture", "bg-pink", "border-pink");
@@ -23,65 +23,64 @@ window.addEventListener("load", function () {
 				var scrollTop = $(window).scrollTop();
 				if (scrollTop > headerOffset) {
 					if (!bottomHeader.hasClass("stick-header")) {
-						// bottomHeader.addClass("stick-header");
 						bottomHeader.addClass("stick-header");
 						bottomHeader.stop().animate({ top: "0" }, 1000);
 					}
 				} else {
 					bottomHeader.removeClass("stick-header");
-					bottomHeader.animate({ top: "" }, 300); // Animate to default position
+					bottomHeader.animate({ top: "" }, 300);
 				}
 			});
 		}
 
-		function filterNews(category, bgColor, borderColor) {
-			var _filter = category;
-			var _bg_color = bgColor;
-			var _border_color = borderColor;
+		// function filterNews(category, bgColor, borderColor) {
+		// 	var _filter = category;
+		// 	var _bg_color = bgColor;
+		// 	var _border_color = borderColor;
 
-			$.ajax({
-				url: eis_ajax.url,
-				type: "POST",
-				data: {
-					action: "tabnews",
-					category: _filter,
-					bgColor: _bg_color,
-					borderColor: _border_color,
-					nonce: eis_ajax.nonce,
-				},
-				beforeSend: function () {
-					$("#" + _filter)
-						.empty()
-						.html("Loading.....");
-				},
-				success: function (res) {
-					$(".tab_content").empty().toggleClass(_border_color).html(res.data);
-				},
-				error: function (err) {
-					console.log(err);
-				},
-			});
-		}
+		// 	$.ajax({
+		// 		url: eis_ajax.url,
+		// 		type: "POST",
+		// 		data: {
+		// 			action: "tabnews",
+		// 			category: _filter,
+		// 			bgColor: _bg_color,
+		// 			borderColor: _border_color,
+		// 			nonce: eis_ajax.nonce,
+		// 		},
+		// 		beforeSend: function () {
+		// 			$("#" + _filter)
+		// 				.empty()
+		// 				.html("Loading.....");
+		// 		},
+		// 		success: function (res) {
+		// 			$(".tab_content").empty().toggleClass(_border_color).html(res.data);
+		// 		},
+		// 		error: function (err) {
+		// 			console.log(err);
+		// 		},
+		// 	});
+		// }
 
-		$(".link").on("click", function (e) {
-			e.preventDefault();
-			var _filter = $(this).data("filter");
-			var _bg_color = $(this).data("bg");
-			var _border_color = $(this).data("border");
+		// $(".link").on("click", function (e) {
+		// 	e.preventDefault();
+		// 	var _filter = $(this).data("filter");
+		// 	var _bg_color = $(this).data("bg");
+		// 	var _border_color = $(this).data("border");
 
-			$(this)
-				.addClass("active")
-				.parent()
-				.siblings()
-				.find("a")
-				.removeClass("active");
+		// 	$(this)
+		// 		.addClass("active")
+		// 		.parent()
+		// 		.siblings()
+		// 		.find("a")
+		// 		.removeClass("active");
 
-			// $("#" + _filter)
-			// 	.addClass("active")
-			// 	.siblings()
-			// 	.removeClass("active");
+		// 	// $("#" + _filter)
+		// 	// 	.addClass("active")
+		// 	// 	.siblings()
+		// 	// 	.removeClass("active");
 
-			filterNews(_filter, _bg_color, _border_color);
-		});
+		// 	filterNews(_filter, _bg_color, _border_color);
+		// });
 	});
 })(jQuery);

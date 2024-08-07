@@ -1,20 +1,23 @@
-<?php
-get_header();
+<?php get_header(); ?>
 
-while (have_posts()) {
-    the_post();
-    if (has_post_thumbnail()) {
-        printf(
-            '<div>
-                %s
-                <div class="caption">%s</div>
-            </div>',
-            get_the_post_thumbnail(null, 'large', ["class" => "img-fluid img"]),
-            get_the_post_thumbnail_caption()
-        );
-    }
-    the_title('<h2>', '</h2>');
-    the_content();
-}
+<main class="content-area">
+    <div class="news-sections">
+        <?php while (have_posts()) : the_post(); ?>
+            <!-- <?php if (has_post_thumbnail()) : ?> -->
+                <div>
+                    <?php the_post_thumbnail(); ?>
+                </div>
+                <div class="caption">
+                    <?php the_post_thumbnail_caption(); ?>
+                </div>
+            <!-- <?php endif; ?> -->
+            <?php the_title('<h2>', '</h2>'); ?>
+            <div>
+                <?php the_content(); ?>
+            </div>
+        <?php endwhile; ?>
+    </div>
+    <?php get_sidebar(); ?>
+</main>
 
-get_footer();
+<?php get_footer(); ?>

@@ -1,69 +1,58 @@
 jQuery(document).ready(function ($) {
-	var ajaxUrl = ajaxTabData.ajaxUrl;
-	var _nonce = ajaxTabData.nonce;
-	var activeTab = ajaxTabData.activeTab;
-	var categories = ajaxTabData.categories;
-
-	$(".tabs-filter li").click(function (e) {
+	$(".filter").on("click", function (e) {
 		e.preventDefault();
+		const ajaxUrl = ajaxTabData.ajaxUrl;
+		const _nonce = ajaxTabData.nonce;
 
-		var clickedTab = $(this).data("tab");
-		
-		var activeBg = $(this).data("active");
-		var defaultBg = $(this).data('bg');
+		const _activeTab = $(this).data("tab");
+		const activeBg = $(this).data("active-bg");
+		const borderColor = $(this).data("border-color");
 
-		$(this).addClass(activeBg).removeClass(defaultBg).siblings().addClass(defaultBg);
+		$(this)
+			.removeClass("filter-inactive")
+			.addClass("active")
+			.siblings()
+			.removeClass("active")
+			.addClass("filter-inactive");
 
-		$(".ajax-tabs-content .tab-content").addClass("hidden").removeClass('active');
-		$(
-			'.ajax-tabs-content .tab-content[data-tab="' + clickedTab + '"]'
-		).removeClass("hidden").addClass('active');
+		$("#" + _activeTab)
+			.removeClass("hidden")
+			.addClass("active")
+			.siblings()
+			.removeClass("active")
+			.addClass("hidden");
+
+			$("#" + _activeTab).html("")
 
 		// Make AJAX request to fetch content for the new tab (if not already loaded)
 		if (
-			$('.ajax-tabs-content .tab-content[data-tab="' + clickedTab + '"]')
-				.html()
-				.trim() === ""
+			$("#" + _activeTab)
+				.html().trim() === ""
 		) {
-      $.ajax({
+			$.ajax({
 				url: ajaxUrl,
 				type: "POST",
 				data: {
 					action: "tabnews",
-					category: clickedTab,
-					// bgColor: _bg_color,
-					// borderColor: _border_color,
+					category: _activeTab,
+					bgColor: activeBg,
+					borderColor: borderColor,
 					nonce: _nonce,
 				},
 				beforeSend: function () {
-					$("#" + clickedTab)
+					$("#" + _activeTab)
 						.empty()
-						.html("Loading.....");
+						.html(
+							'<div class="flex justify-center items-center h-[420px] w-full">Loading.....</div>'
+						);
 				},
 				success: function (res) {
-					// $(".tab_content").empty().toggleClass(_border_color).html(res.data);
-          $(
-						'.ajax-tabs-content .tab-content[data-tab="' + clickedTab + '"]'
-					).html(res.data);
+					$("#" + _activeTab).html(res.data);
 				},
 				error: function (err) {
-					console.log(err);
+					console.log(err, ">>> Error Axjax Response");
 				},
 			});
-
-			// $.ajax({
-			// 	url: ajaxUrl,
-			// 	type: "post",
-			// 	data: {
-			// 		action: "fetch_category_news", // Custom action for AJAX request
-			// 		category: clickedTab,
-			// 	},
-			// 	success: function (response) {
-					// $(
-					// 	'.ajax-tabs-content .tab-content[data-tab="' + clickedTab + '"]'
-					// ).html(response);
-			// 	},
-			// });
 		}
 	});
 });

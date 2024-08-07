@@ -1,16 +1,16 @@
 .tabs-filter li {
-  padding: 10px 20px; /* Add padding for content */
-  cursor: pointer; /* Make tabs clickable */
-  border-bottom: 2px solid transparent; /* Remove default bottom border */
-  transition: background-color 0.2s ease-in-out; /* Add smooth transition for background color change */
+  padding: 10px 20px;
+  cursor: pointer; 
+  border-bottom: 2px solid transparent;
+  transition: background-color 0.2s ease-in-out;
 }
 
 .ajax-tabs-nav li.active,
 .ajax-tabs-nav li:hover {
-  background-color: #ddd; /* Set background color for active and hover states */
-  border-bottom-color: #ccc; /* Add a bottom border for active and hover states */
+  background-color: #ddd;
+  border-bottom-color: #ccc;
 }
 
 .ajax-tabs-content {
-  flex: 1; /* Make content area take up remaining space */
+  flex: 1;
 }

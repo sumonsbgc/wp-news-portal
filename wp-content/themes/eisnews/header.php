@@ -52,7 +52,7 @@
       </div>
 
       <div class="flex justify-between items-center p-2">
-        <div class="w-3/12">
+        <div class="sm:w-3/12 w-full">
           <?php
           if (has_custom_logo()) {
             echo get_custom_logo();
@@ -61,7 +61,7 @@
           }
           ?>
         </div>
-        <div class="w-8/12">
+        <div class="sm:w-8/12 sm:block hidden">
           <img src="<?php echo get_theme_file_uri("assets/images/Ad.webp"); ?>" style="width: 100%; height: 90px;" />
         </div>
       </div>
@@ -69,9 +69,7 @@
       <div class="bottom-header" id="bottom-header">
         <div class="breaking_news flex items-center bg-black text-white pr-3">
           <span class="headline">সর্বশেষ:</span>
-          <?php
-          echo do_shortcode("[breaking_news]");
-          ?>
+          <?php echo do_shortcode("[breaking_news]"); ?>
         </div>
         <div class="navarea mt-1 black">
           <?php
@@ -85,7 +83,7 @@
                 'echo' => false
               )
             );
-            echo $menu;
+            // echo $menu;
           }
           ?>
         </div>

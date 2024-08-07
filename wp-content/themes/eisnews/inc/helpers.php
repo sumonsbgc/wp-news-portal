@@ -43,6 +43,10 @@ function eis_section_title($template = null)
   }
 }
 
+function eis_short_title(string $title, int $length): string {
+  return substr($title, 0);
+}
+
 function eis_get_category_name($slug)
 {
   $term = get_category_by_slug($slug);
