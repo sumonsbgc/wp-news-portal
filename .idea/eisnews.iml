@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="WEB_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/wp-content/plugins/query-monitor/tests/integration" isTestSource="true" packagePrefix="QM\Tests\" />
+      <sourceFolder url="file://$MODULE_DIR$/wp-content/plugins/redis-cache/dependencies/predis/predis/src" isTestSource="false" packagePrefix="Predis\" />
+      <sourceFolder url="file://$MODULE_DIR$/wp-content/plugins/redis-cache/dependencies/predis/predis/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/wp-content/plugins/wp-graphql/src" isTestSource="false" packagePrefix="WPGraphQL" />
+      <sourceFolder url="file://$MODULE_DIR$/wp-includes" isTestSource="false" packagePrefix="PHPMailer" />
+      <sourceFolder url="file://$MODULE_DIR$/wp-includes/sodium_compat/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/wp-content/plugins/eis-theme-options" isTestSource="false" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/composer" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/dotenv" />
+      <excludeFolder url="file://$MODULE_DIR$/wp-content/plugins/jwt-authentication-for-wp-rest-api/includes/vendor/composer" />
+      <excludeFolder url="file://$MODULE_DIR$/wp-content/plugins/jwt-authentication-for-wp-rest-api/includes/vendor/firebase/php-jwt" />
+      <excludeFolder url="file://$MODULE_DIR$/wp-content/plugins/query-monitor/vendor/composer" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>
