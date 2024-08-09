@@ -1,0 +1,20 @@
+{
+    "name": "sumonsbgc/eis-theme-options",
+    "description": "A plugin for Dainik Purbokone news portal theme options",
+    "type": "wordpress-plugin",
+    "license": "GPLv2",
+    "authors": [
+        {
+            "name": "Mohammad Sumon",
+            "email": "sumonsbgc@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Eis\\ThemeOption\\": "includes/"
+        },
+        "files": []
+    }
+}

@@ -1,6 +1,6 @@
 <?php
 // echo $_ENV['DB_HOST'];
-
+define('WP_CACHE', $_ENV['WP_CACHE']);
 define('WP_HOME', $_ENV['WP_HOME']);
 define('WP_SITEURL', $_ENV['WP_SITEURL']);
 define( 'WP_DEBUG',  $_ENV['WP_DEBUG']);
