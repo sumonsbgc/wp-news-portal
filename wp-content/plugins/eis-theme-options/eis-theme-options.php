@@ -35,7 +35,7 @@ final class EIS_Theme_Options {
         add_action('plugins_loaded', [$this, 'init_plugin']);
     }
 
-    public function init_plugin()
+    public function init_plugin(): void
     {
         if (is_admin()){
             new Eis\ThemeOption\Admin();
