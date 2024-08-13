@@ -6,6 +6,6 @@ class ThemeOptions
 {
   public function plugin_page(): void
   {
-    echo 'Plugin Page';
+    include_once __DIR__ . '/views/theme-options.php';
   }
 }
