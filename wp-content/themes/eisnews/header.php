@@ -83,7 +83,7 @@
                 'echo' => false
               )
             );
-            // echo $menu;
+             echo $menu;
           }
           ?>
         </div>
