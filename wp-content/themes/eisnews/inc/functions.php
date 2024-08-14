@@ -4,20 +4,24 @@
 || Query and Cache Breaking News data;
 =======================================================
 */
+/**
+ * @throws Exception
+ */
 function display_breaking_news()
 {
   $cache_key = 'breaking_news';
-  $cahced_breaking_news = wp_cache_get($cache_key);
+  $cached_breaking_news = wp_cache_get($cache_key);
 
-  if ($cahced_breaking_news === false) {
+  if ($cached_breaking_news === false) {
     $breaking_news = new WP_Query(
       [
         "post_type"     => "post",
         "posts_per_page" => 10
       ]
     );
+    $html = '';
     if ($breaking_news->have_posts()) {
-      $html = '<ul id="news-ticker-wrap" class="h-full flex gap-2">';
+      $html .= '<ul id="news-ticker-wrap" class="h-full flex gap-2">';
       while ($breaking_news->have_posts()) {
         $breaking_news->the_post();
         $html .= sprintf(
@@ -32,15 +36,16 @@ function display_breaking_news()
         );
       }
       $html .= '</ul>';
+      wp_reset_postdata();
     }
-    wp_reset_postdata();
+
     if (wp_cache_add($cache_key, $html, '', DAY_IN_SECONDS)) {
       return $html;
     } else {
-      throw new Exception("The $cache_key is alreay exist", 1);
+      throw new Exception("The $cache_key is already exist", 1);
     }
   } else {
-    return $cahced_breaking_news;
+    return $cached_breaking_news;
   }
 }
 
@@ -111,24 +116,35 @@ function display_news_by_category(string $category_slug, string $bgColor = 'bg-r
       $html = '<div class="my-10">';
       $html .= eis_news_section_title($category_slug, $borderColor, $catBgColor);
       $html .= '<div class="grid md:grid-cols-4 sm:grid-cols-3 grid-cols-2 gap-4">';
-      while ($news_query->have_posts()) {
-        $news_query->the_post();
-        $html .= get_template_part_as_string('templates/news/news', null, ['bgColor' => $bgColor, 'borderColor' => $borderColor]);
-      }
-      $html .= '</div>';
-      $html .= '</div>';
-      wp_reset_postdata();
-
-      if (wp_cache_add($cache_key, $html, '', DAY_IN_SECONDS)) {
-        wp_cache_replace($cache_key, $html, '', DAY_IN_SECONDS);
-        return $html;
-      } else {
-        return $html;
-      }
+        return extracted($news_query, $bgColor, $borderColor, $html, $cache_key);
     }
   } else {
     return $cached_news;
   }
+}
+
+/**
+ * @param WP_Query $news_query
+ * @param string $bgColor
+ * @param string $borderColor
+ * @param string $html
+ * @param string $cache_key
+ * @return string
+ */
+function extracted(WP_Query $news_query, string $bgColor, string $borderColor, string $html, string $cache_key): string
+{
+    while ($news_query->have_posts()) {
+        $news_query->the_post();
+        $html .= get_template_part_as_string('templates/news/news', null, ['bgColor' => $bgColor, 'borderColor' => $borderColor]);
+    }
+    $html .= '</div>';
+    $html .= '</div>';
+    wp_reset_postdata();
+
+    if (wp_cache_add($cache_key, $html, '', DAY_IN_SECONDS)) {
+        wp_cache_replace($cache_key, $html, '', DAY_IN_SECONDS);
+    }
+    return $html;
 }
 
 
@@ -153,20 +169,7 @@ function display_two_rows_news(string $category_slug, string $bgColor = 'bg-red-
       $html = '<div class="my-10">';
       $html .= eis_news_section_title($category_slug, $borderColor, $catBgColor);
       $html .= '<div class="grid md:grid-cols-2 sm:grid-cols-3 grid-cols-2 grid-rows-2 gap-4 h-full">';
-      while ($news_query->have_posts()) {
-        $news_query->the_post();
-        $html .= get_template_part_as_string('templates/news/news', null, ['bgColor' => $bgColor, 'borderColor' => $borderColor]);
-      }
-      $html .= '</div>';
-      $html .= '</div>';
-      wp_reset_postdata();
-
-      if (wp_cache_add($cache_key, $html, '', DAY_IN_SECONDS)) {
-        wp_cache_replace($cache_key, $html, '', DAY_IN_SECONDS);
-        return $html;
-      } else {
-        return $html;
-      }
+        return extracted($news_query, $bgColor, $borderColor, $html, $cache_key);
     }
   } else {
     return $cached_news;

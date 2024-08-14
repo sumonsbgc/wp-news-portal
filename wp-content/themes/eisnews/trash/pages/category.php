@@ -13,8 +13,6 @@ $qb = get_queried_object();
                     </div>
                 </div>
 
-
-
                 <div class="row <?php echo "category_page_".$qb->term_id; ?>">
                     <?php
                         if (have_posts()){
@@ -23,9 +21,7 @@ $qb = get_queried_object();
                                 $location = get_post_meta( get_the_ID(), "dp_w_location", true );
                                 if ($post_count==1){?>
                                     <div class="col-lg-12 col-sm-12 col-12 my-2">
-                                        
-<?php echo do_shortcode('[advertise position=""]'); ?>
-
+                                        <?php echo do_shortcode('[advertise position=""]'); ?>
                                         <div class="category-page-first-news mb-5">
                                             <div class="row">
                                                 <div class="col-lg-6">
@@ -53,12 +49,7 @@ $qb = get_queried_object();
                                             </div>
                                         </div>
                                     </div>
-                                    
-                                    
-
-                                    
-                                    
-                                <?php } else{ ?>
+                                <?php } else { ?>
                                         <div class="col-lg-4 col-sm-6 col-6 my-2">
                                             <div class="category-page-news">
                                                 <div class="category-page-news-image">
