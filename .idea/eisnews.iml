@@ -5,15 +5,14 @@
       <sourceFolder url="file://$MODULE_DIR$/wp-content/plugins/query-monitor/tests/integration" isTestSource="true" packagePrefix="QM\Tests\" />
       <sourceFolder url="file://$MODULE_DIR$/wp-content/plugins/redis-cache/dependencies/predis/predis/src" isTestSource="false" packagePrefix="Predis\" />
       <sourceFolder url="file://$MODULE_DIR$/wp-content/plugins/redis-cache/dependencies/predis/predis/tests" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/wp-content/plugins/wp-graphql/src" isTestSource="false" packagePrefix="WPGraphQL" />
-      <sourceFolder url="file://$MODULE_DIR$/wp-includes" isTestSource="false" packagePrefix="PHPMailer" />
       <sourceFolder url="file://$MODULE_DIR$/wp-includes/sodium_compat/tests" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/wp-content/plugins/eis-theme-options" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/wp-content/plugins/eis-theme-options/includes" isTestSource="false" packagePrefix="Eis\ThemeOption\" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/composer" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/dotenv" />
       <excludeFolder url="file://$MODULE_DIR$/wp-content/plugins/jwt-authentication-for-wp-rest-api/includes/vendor/composer" />
       <excludeFolder url="file://$MODULE_DIR$/wp-content/plugins/jwt-authentication-for-wp-rest-api/includes/vendor/firebase/php-jwt" />
       <excludeFolder url="file://$MODULE_DIR$/wp-content/plugins/query-monitor/vendor/composer" />
+      <excludeFolder url="file://$MODULE_DIR$/wp-content/plugins/eis-theme-options/vendor/composer" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

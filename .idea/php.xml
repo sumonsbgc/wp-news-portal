@@ -17,6 +17,7 @@
       <path value="$PROJECT_DIR$/wp-content/plugins/jwt-authentication-for-wp-rest-api/includes/vendor/firebase/php-jwt" />
       <path value="$PROJECT_DIR$/wp-content/plugins/jwt-authentication-for-wp-rest-api/includes/vendor/composer" />
       <path value="$PROJECT_DIR$/wp-content/plugins/query-monitor/vendor/composer" />
+      <path value="$PROJECT_DIR$/wp-content/plugins/eis-theme-options/vendor/composer" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.2">

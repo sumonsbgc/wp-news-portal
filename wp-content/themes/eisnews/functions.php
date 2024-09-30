@@ -77,17 +77,15 @@ add_action("pre_get_posts", function ($query) {
         if ($query->get('post_type') !== 'nav_menu_item') {
             $query->set('post_type', 'post');
             $query->set('post_status', 'publish');
-            $query->set('no_found_rows', true);
             $query->set('cache_results', true);
             $query->set('update_post_meta_cache', true);
             $query->set('update_post_term_cache', true);
             $query->set('orderby', 'date');
             $query->set('order', 'DSC');
-            $query->set('fields', 'ids');
         }
 
         if ($query->is_main_query()) {
-            $query->set('posts_per_page', 1);
+            $query->set('posts_per_page', 10);
         }
     }
 });
@@ -170,18 +168,15 @@ function save_custom_meta_boxes($post_id): void
 }
 add_action('save_post', 'save_custom_meta_boxes');
 
-function dpkone_pagination()
+function dpkone_pagination($query): void
 {
-    global $wp_query;
     $links = paginate_links([
         'current' => max(1, get_query_var('paged')),
-        'total' => $wp_query->max_num_pages,
+        'total' => $query->max_num_pages,
         'type' => 'list'
     ]);
 
-    print_r($links);
     $links = str_replace('<li>', '<li style="display: inline-block;">', $links);
-    $links = str_replace("<ul class='page-numbers'>", "<ul class='pagination py-3'>", $links);
-
+    $links = str_replace("<ul class='page-numbers'>", "<ul class='pagination my-3'>", $links);
     echo $links;
 }

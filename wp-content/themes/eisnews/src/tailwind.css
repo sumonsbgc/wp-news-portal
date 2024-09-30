@@ -6,7 +6,8 @@
   @font-face {
     font-family: "Kalpurush";
     font-weight: 300;
-    src: url("./fonts/kalpurush/kalpurush.ttf") format("truetype"),
+    src:
+      url("./fonts/kalpurush/kalpurush.ttf") format("truetype"),
       url("./fonts/kalpurush/Kalpurush.woff") format("woff");
   }
 
@@ -139,7 +140,7 @@ body {
 /*Tab Filter CSS */
 
 .tab-filters {
-  @apply flex gap-0
+  @apply flex gap-0;
 }
 
 .filter {
@@ -147,24 +148,24 @@ body {
 }
 
 .filter-inactive {
-  @apply bg-gray-200 text-black
+  @apply bg-gray-200 text-black;
 }
 
 .yellow-bg.active {
-  @apply bg-yellow text-white
+  @apply bg-yellow text-white;
 }
 
 .green-bg.active {
-  @apply bg-green text-white
+  @apply bg-green text-white;
 }
 
 .pink-bg.active {
-  @apply bg-pink text-white
+  @apply bg-pink text-white;
 }
 
 .tab-contents {
   /* @apply bg-gray-100 */
-  @apply bg-gray-light
+  @apply bg-gray-light;
 }
 
 .tab-content {
@@ -176,5 +177,22 @@ body {
   @apply grid gap-4 md:grid-cols-4 sm:grid-cols-3 grid-cols-2 lg:grid-rows-2;
 }
 
+.pagination {
+  @apply mt-6 mb-0 mx-auto flex justify-center items-center cursor-pointer;
+}
 
-@layer components {}
+.pagination li .page-numbers {
+  background-color: #ea5745 !important;
+  margin: 0 4px;
+  padding: 7px 16px;
+  color: #fff !important;
+  border: #ea5745;
+  border-radius: 5px;
+}
+
+.pagination li .page-numbers.current {
+  background: #ef8578 !important;
+}
+
+@layer components {
+}
