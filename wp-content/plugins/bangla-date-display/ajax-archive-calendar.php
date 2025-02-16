@@ -65,18 +65,18 @@ class bddp_ac_widget extends WP_Widget {
 					<?php
 					if ('bn' === substr(get_locale(), 0, 2) || $bengali==1) {
 						$month=array(
-							'01'=>'জানুয়ারী',
-							'02'=>'ফেব্রুয়র',
-							'03'=>'মার্',
-							'04'=>'এ্রি',
-							'05'=>'ে',
+							'01'=>'জানুয়ারি',
+							'02'=>'ফেব্রুয়ারি',
+							'03'=>'মার্চ',
+							'04'=>'এপ্রিল',
+							'05'=>'মে',
 							'06'=>'জুন',
-							'07'=>'জুলা',
-							'08'=>'আগষ্',
+							'07'=>'জুলাই',
+							'08'=>'আগস্ট',
 							'09'=>'সেপ্টেম্বর',
 							'10'=>'অক্টোবর',
-							'11'=>'নভেম্র',
-							'12'=>'ডিস্বর'
+							'11'=>'নভেম্বর',
+							'12'=>'ডিসেম্বর'
 						);
 					} else{
 						$month = array();
@@ -312,7 +312,7 @@ function bddp_ac_calendar($ma=null,$bn=1, $echo = true) {
 		$myweek[] = $wp_locale->get_weekday(($wdcount + $week_begins) % 7);
 	}
 
-	$barr = array('Saturday' => 'শনি', 'Sunday' => 'রবি', 'Monday' => 'সোম', 'Tuesday' => 'মঙ্গল', 'Wednesday' => 'বু', 'Thursday' => 'বৃহ', 'Friday' => 'শুক্র');
+	$barr = array('Saturday' => 'শনি', 'Sunday' => 'রবি', 'Monday' => 'সোম', 'Tuesday' => 'মঙ্গল', 'Wednesday' => 'বুধ', 'Thursday' => 'বৃহ', 'Friday' => 'শুক্র');
 	foreach ($myweek as $wd) {
 		if ('bn' === substr(get_locale(), 0, 2) || $bn==1) {
 			$day_name = $barr[$wd];

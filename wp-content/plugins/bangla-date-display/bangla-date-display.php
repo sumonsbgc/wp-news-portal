@@ -4,7 +4,7 @@ Plugin Name: Bangla Date Display
 Plugin URI: https://imran.link
 Description: Displays Bangla, Gregorian and Hijri date in bangla language via widgets and shortcodes! Options for displaying post/page's time, date, comment count, archive calendar etc in Bangla language.
 Author: ALI IMRAN
-Version: 9.3
+Version: 9.4
 Author URI: https://imran.link
 */
 
@@ -74,7 +74,7 @@ function render_bangla_day() {
 	
 	$offset = isset($bddp_options['en_tz']) ? $bddp_options['en_tz']*60*60 : 21600;
 
-	return en_to_bn(gmdate("l", time()+$offset));
+	echo en_to_bn(gmdate("l", time()+$offset));
 	
 	$output = ob_get_contents(); // end output buffering
 	ob_end_clean(); // grab the buffer contents and empty the buffer
@@ -126,23 +126,22 @@ function bddp_bn_season() {
 	$banglaDate = new BanglaDate(time()+$offset, 0);
 	$month = $banglaDate->get_date()[1];
 
-	if ( $month == "বৈশাখ" || $month == "জ্যৈষ্ঠ" ) {
-		return "গ্রীষ্মকাল";
-	} else if ( $month == "আষাঢ়" || $month == "শ্রাবণ" ) {
-		return "বর্ষাকাল";
-	}
-	else if ( $month == "ভাদ্র" || $month == "আশ্বিন" ) {
-		return "শরৎকাল";
-	}
-	else if ( $month == "কার্তিক" || $month == "অগ্রহায়ণ" ) {
-		return "হেমন্তকাল";
-	}
-	else if ( $month == "পৌষ" || $month == "মাঘ" ) {
-		return "শীতকাল";
-	}
-	else {
-		return "বসন্তকাল";
-	}
+	$seasons = [
+		"বৈশাখ" => "গ্রীষ্মকাল",
+		"জ্যৈষ্ঠ" => "গ্রীষ্মকাল",
+		"আষাঢ়" => "বর্ষাকাল",
+		"শ্রাবণ" => "বর্ষাকাল",
+		"ভাদ্র" => "শরৎকাল",
+		"আশ্বিন" => "শরৎকাল",
+		"কার্তিক" => "হেমন্তকাল",
+		"অগ্রহায়ণ" => "হেমন্তকাল",
+		"পৌষ" => "শীতকাল",
+		"মাঘ" => "শীতকাল",
+		"ফাল্গুন" => "বসন্তকাল",
+		"চৈত্র" => "বসন্তকাল"
+	];
+	
+	echo $seasons[$month];
 	
 	$output = ob_get_contents(); // end output buffering
 	ob_end_clean(); // grab the buffer contents and empty the buffer
@@ -225,150 +224,8 @@ function render_hijri_date() {
 }
 
 
-//================== Widget 01 ========================
-
-function widget_bangla_date_display( $args ) {
-	extract( $args );
-
-	$bddp_wgt1 = get_option( "bddp_wgt1" );
-	if ( !is_array( $bddp_wgt1 ) ) {
-		$bddp_wgt1 = array(
-			'title' => 'আজকের দিন-তারিখ',
-			'day' => '1',
-			'time' => '1',
-			'en_date' => '1',
-			'hijri_date' => '1',
-			'bn_date' => '1',
-			'season' => '1' );
-	}
-
-	echo $before_widget;
-	echo $before_title . $bddp_wgt1[ 'title' ] . $after_title;
-	echo "<ul>";
-	if ( $bddp_wgt1[ 'day' ] == "1" || $bddp_wgt1[ 'time' ] == "1" ) {
-		echo "<li>";
-	}
-	if ( $bddp_wgt1[ 'day' ] == "1" ) {
-		echo do_shortcode( '[bangla_day]' );
-	}
-	if ( $bddp_wgt1[ 'time' ] == "1" ) {
-		echo " (";
-		echo do_shortcode( '[bangla_time]' );
-		echo ")";
-	}
-	if ( $bddp_wgt1[ 'day' ] == "1" || $bddp_wgt1[ 'show_time' ] == "1" ) {
-		echo "</li>";
-	}
-	if ( $bddp_wgt1[ 'en_date' ] == "1" ) {
-		echo "<li>";
-		echo do_shortcode( '[english_date]' );
-		echo "</li>";
-	}
-	if ( $bddp_wgt1[ 'hijri_date' ] == "1" ) {
-		echo "<li>";
-		echo do_shortcode( '[hijri_date]' );
-		echo "</li>";
-	}
-	if ( $bddp_wgt1[ 'bn_date' ] == "1" || $bddp_wgt1[ 'show_season' ] == "1" ) {
-		echo "<li>";
-	}
-	if ( $bddp_wgt1[ 'bn_date' ] == "1" ) {
-		echo do_shortcode( '[bangla_date]' );
-	}
-	if ( $bddp_wgt1[ 'season' ] == "1" ) {
-		echo " (";
-		echo do_shortcode( '[bangla_season]' );
-		echo ")";
-	}
-	?>
-	<?php
-	if ( $bddp_wgt1[ 'bn_date' ] == "1" || $bddp_wgt1[ 'season' ] == "1" ) {
-		echo "</li>";
-	}
-	echo "</ul>";
-	echo $after_widget;
-}
-
-function bddp_wgt1_control() {
-	$bddp_wgt1 = get_option("bddp_wgt1");
-	if (!is_array($bddp_wgt1)) {
-		$bddp_wgt1 = array(
-			'title' => 'আজকের দিন-তারিখ',
-			'day' => '1',
-			'time' => '1',
-			'en_date' => '1',
-			'hijri_date' => '1',
-			'bn_date' => '1',
-			'season' => '1'
-		);
-	}
-
-	if (isset($_POST['widget_control_submit'])) {
-		$bddp_wgt1['title'] = htmlspecialchars($_POST['title']);
-		$bddp_wgt1['day'] = $_POST['day'];
-		$bddp_wgt1['time'] = $_POST['time'];
-		$bddp_wgt1['en_date'] = $_POST['en_date'];
-		$bddp_wgt1['hijri_date'] = $_POST['hijri_date'];
-		$bddp_wgt1['bn_date'] = $_POST['bn_date'];
-		$bddp_wgt1['season'] = $_POST['season'];
-		update_option("bddp_wgt1", $bddp_wgt1);
-	}
-	?>
-
-	<p>
-		<table width="100%">
-			<tr>
-				<td> <label for="title">Title: </label>
-				</td>
-				<td><input type="text" id="title" name="title" value="<?php echo $bddp_wgt1['title'];?>"/> </td>
-			</tr>
-
-			<tr>
-				<td>Show:</td>
-				<td><input type="checkbox" id="day" name="day" value="1" <?php if($bddp_wgt1[ 'day']==1) echo( 'checked="checked"'); ?>/><label for="day">Day</label>
-				</td>
-			</tr>
-
-			<tr>
-				<td></td>
-				<td><input type="checkbox" id="time" name="time" value="1" <?php if($bddp_wgt1[ 'time']==1) echo( 'checked="checked"'); ?>/><label for="time">Time</label>
-				</td>
-			</tr>
-
-			<tr>
-				<td></td>
-				<td><input type="checkbox" id="en_date" name="en_date" value="1" <?php if($bddp_wgt1[ 'en_date']==1) echo( 'checked="checked"'); ?>/><label for="en_date">Gregorian Date</label>
-				</td>
-			</tr>
-
-			<tr>
-				<td></td>
-				<td><input type="checkbox" id="hijri_date" name="hijri_date" value="1" <?php if($bddp_wgt1[ 'hijri_date']==1) echo( 'checked="checked"'); ?>/><label for="hijri_date">Hijri Date</label>
-				</td>
-			</tr>
-
-			<tr>
-				<td></td>
-				<td><input type="checkbox" id="bn_date" name="bn_date" value="1" <?php if($bddp_wgt1[ 'bn_date']==1) echo( 'checked="checked"'); ?>/><label for="bn_date">Bangla Date</label>
-				</td>
-			</tr>
-
-			<tr>
-				<td></td>
-				<td><input type="checkbox" id="season" name="season" value="1" <?php if($bddp_wgt1[ 'season']==1) echo( 'checked="checked"'); ?>/><label for="season">Season Name</label>
-				</td>
-			</tr>
-		</table>
-
-		<input type="hidden" id="widget_control_submit" name="widget_control_submit" value="1"/>
-	</p>
-	<p><span style="color: gray;">Go to: Settings > <a href="<?php admin_url(); ?>options-general.php?page=bangla-date-display">Bangla Date Display</a> to change plugin settings.</span>
-	</p>
-	<?php
-}
-
-wp_register_sidebar_widget( 'bangla_date_display', 'Bangla Date Display', 'widget_bangla_date_display', array( 'description' => __( 'Displays Bangla, Gregorian & Hijri date, time, day and season name.' ) ) );
-wp_register_widget_control( 'bangla_date_display', 'Bangla Date Display', 'bddp_wgt1_control' );
+//================== Widgets ========================
+require __DIR__.'/widgets.php';
 
 // ========== Action Links =================
 function bddp_action_links( $links ) {

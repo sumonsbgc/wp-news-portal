@@ -1,0 +1,13 @@
+/*
+Theme Name: Online Portal
+Theme URI: https://github.com/sumonsbgc/online-portal
+Author: Mohammad Sumon
+Author URI: https://github.com/sumonsbgc
+Description: Online News Portal
+Version: 1.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: eis
+*/
+
+@import "./src/style.css";

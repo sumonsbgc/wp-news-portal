@@ -3,7 +3,7 @@
 define('WP_CACHE', $_ENV['WP_CACHE']);
 define('WP_HOME', $_ENV['WP_HOME']);
 define('WP_SITEURL', $_ENV['WP_SITEURL']);
-define( 'WP_DEBUG',  $_ENV['WP_DEBUG']);
+define('WP_DEBUG',  $_ENV['WP_DEBUG']);
 
 define('DB_HOST', $_ENV['DB_HOST']);
 define('DB_NAME', $_ENV['DB_NAME']);
