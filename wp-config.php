@@ -11,7 +11,7 @@ $dotenv->load(__DIR__ . '/eisapp/.env');
 require_once __DIR__ . '/eisapp/application.php';
 
 /** Absolute path to the WordPress directory. */
-if (! defined('ABSPATH')) {
+if (!defined('ABSPATH')) {
 	define('ABSPATH', __DIR__ . '/');
 }
 

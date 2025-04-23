@@ -1,6 +1,15 @@
 <style>
     .grid-cols-3 {
         grid-template-columns: repeat(3, 1fr);
+
+    .flex-row {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        align-items: start;
+        margin-top: 10px;
+        
+    }
     }
 </style>
 <div class="wrap">
@@ -12,32 +21,32 @@
                     <th scope="row"><label for=""><?php _e('নামাজের সময়সূচি', 'eis'); ?></label></th>
                     <td>
                         <div class="grid grid-cols-3 gap-4">
-                            <div class="flex flex-col">
+                            <div class="flex-row">
                                 <label for=""><?php _e('যোহর ', 'eis'); ?></label>
                                 <input name="salat[zohor]" type="text" id="salat_routine" value="" class="" />
                             </div>
 
-                            <div class="flex flex-col">
+                            <div class="flex-row">
                                 <label for=""><?php _e('আছর', 'eis'); ?></label>
                                 <input name="salat[asor]" type="text" id="salat_routine" value="" class="" />
                             </div>
 
-                            <div class="flex flex-col">
+                            <div class="flex-row">
                                 <label for=""><?php _e('মাগরিব ', 'eis'); ?></label>
                                 <input name="salat[margib]" type="text" id="salat_routine" value="" class="" />
                             </div>
 
-                            <div class="flex flex-col">
+                            <div class="flex-row">
                                 <label for=""><?php _e('এশার', 'eis'); ?></label>
                                 <input name="salat[isha]" type="text" id="salat_routine" value="" class="" />
                             </div>
 
-                            <div class="flex flex-col">
+                            <div class="flex-row">
                                 <label for=""><?php _e('ফজর', 'eis'); ?></label>
                                 <input name="salat[fazar]" type="text" id="salat_routine" value="" class="" />
                             </div>
 
-                            <div class="flex flex-col">
+                            <div class="flex-row">
                                 <label for=""><?php _e('সুর্যোদয়', 'eis'); ?></label>
                                 <input name="salat[sunrise]" type="text" id="salat_routine" value="" class="" />
                             </div>
