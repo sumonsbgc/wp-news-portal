@@ -202,7 +202,7 @@
                     </div>
                 </div>
                 <div class="flex ">
-                    <button type="button" class="delete-sports-news">Delete</button>
+                    <button type="button" class="delete-sports-news"> <span class="dashicons dashicons-dismiss"></span> Delete</button>
                 </div>
             </div>
         `;
