@@ -93,9 +93,10 @@
                 </tr>
                 <tr>
                     <th><label><?php _e('Cricket Score', 'eis'); ?></label></th>
+
                     <td>
-                       <div class="flex bg-white p-4 gap-3">
-                           <div class=" flex flex-col">
+                       <div class="flex gap-3 p-4 bg-white">
+                           <div class="flex flex-col ">
                                <label for="">Sports Name</label>
                                <input type="text" class="regular-text" name="sports[0][sports_name]" value=""  style="border: 1px solid gray" />
                            </div>
@@ -104,8 +105,9 @@
                                <textarea name="sports[0][sports_news]" id="" cols="30" rows="" class="regular-text"></textarea>
                            </div>
                        </div>
-                        <div class="flex bg-white p-4 gap-3">
-                            <div class=" flex flex-col">
+                       
+                        <div class="flex gap-3 p-4 bg-white">
+                            <div class="flex flex-col ">
                                 <label for="">Sports Name</label>
                                 <input type="text" class="regular-text" name="sports[1][sports_name]" value=""  style="border: 1px solid gray" />
                             </div>
@@ -114,6 +116,7 @@
                                 <textarea name="sports[1][sports_news]" id="" cols="30" rows="" class="regular-text"></textarea>
                             </div>
                         </div>
+                        
                     </td>
                 </tr>
             </tbody>

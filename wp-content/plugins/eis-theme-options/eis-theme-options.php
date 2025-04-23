@@ -64,6 +64,7 @@ final class EIS_Theme_Options {
 
     public function activate(): void {
         $installed = get_option('eis-theme-options-installed');
+        
         if ( ! $installed ) {
             update_option('eis-theme-options-installed', time());
         }
