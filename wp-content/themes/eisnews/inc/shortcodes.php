@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * @throws Exception
+ */
 function news_ticker($attr, $content)
 {
   return display_breaking_news();
@@ -24,7 +26,7 @@ function get_two_rows_news($attr, $content)
 }
 add_shortcode('two_rows_news', 'get_two_rows_news');
 
-function get_two_cats_news($attr, $content)
+function get_two_cats_news($attr, $content): string
 {
   $html = '<div class="grid md:grid-cols-2 grid-cols-1 gap-4">';
   $html .= do_shortcode($content);
@@ -41,7 +43,8 @@ add_shortcode('two_cat_news', 'get_two_cats_news');
 */
 add_action("wp_ajax_tabnews", "display_tabnews");
 add_action("wp_ajax_nopriv_tabnews", "display_tabnews");
-function display_tabnews()
+
+function display_tabnews(): void
 {
   $category = filter_input(INPUT_POST, 'category');
   $borderColor = filter_input(INPUT_POST, 'borderColor');
