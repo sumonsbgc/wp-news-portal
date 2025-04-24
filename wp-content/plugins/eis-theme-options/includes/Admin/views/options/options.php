@@ -81,10 +81,10 @@ if (isset($_GET['status']) && $_GET['status'] === 'success') {
                 <tr>
                     <th><label><?php _e('Youtube Playlist ID', 'eis'); ?></label></th>
                     <td>
-                        <div class="margin-youtube">
+                        <div id="youtube-playlist-container" class="margin-youtube">
                             <input name="ytd_playlist_id[]" type="text" id="salat_routine" value="" class="regular-text" />
                         </div>
-
+                        <button type="button" id="add-youtube-playlist" class="add-sports-news"><span class="dashicons dashicons-plus-alt"></span>Add Youtube Playlist</button>
                     </td>
                 </tr>
                 <tr>

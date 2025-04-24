@@ -44,7 +44,6 @@
 
 .add-sports-news:hover {
   background-color: #218838;
-  /* Darker green on hover */
 }
 
 .delete-sports-news {
@@ -68,7 +67,12 @@
 
 .margin-youtube {
   margin-bottom: 1rem;
+  margin-top: 1rem;
 }
 .text-xl{
   font-size: 1.5rem;
+}
+
+.border {
+  border: 2px solid tomato;
 }
