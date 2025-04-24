@@ -34,6 +34,7 @@
         margin-top: 1rem;
         background-color: #28a745;
         border: none;
+        outline: none;
         padding: 0.5rem 1rem;
         color: white;
         border-radius: 4px;
@@ -48,10 +49,14 @@
     }
 
     .delete-sports-news {
-        padding: 0.5rem 1rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0.75rem;
         background-color: #dc3545;
         color: white;
         border: none;
+        outline: none;
         border-radius: 4px;
         cursor: pointer;
         font-weight: 500;
@@ -60,6 +65,13 @@
 
     .delete-sports-news:hover {
         background-color: #c82333;
+    }
+
+    .margin-youtube {
+        margin-bottom: 1rem;
+    }
+    .text-xl{
+        font-size: 1.5rem;
     }
 </style>
 
@@ -139,7 +151,7 @@
                 <tr>
                     <th><label><?php _e('Youtube Playlist ID', 'eis'); ?></label></th>
                     <td>
-                        <div>
+                        <div class="margin-youtube">
                             <input name="ytd_playlist_id[]" type="text" id="salat_routine" value="" class="regular-text" />
                         </div>
                         <div>
@@ -202,7 +214,7 @@
                     </div>
                 </div>
                 <div class="flex ">
-                    <button type="button" class="delete-sports-news"> <span class="dashicons dashicons-dismiss"></span> Delete</button>
+                    <button type="button" class="delete-sports-news"> <span class="dashicons dashicons-dismiss text-xl" ></span></button>
                 </div>
             </div>
         `;
