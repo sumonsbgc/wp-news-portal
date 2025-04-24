@@ -51,13 +51,6 @@ function init_theme(): void
 }
 add_action("after_setup_theme", "init_theme");
 
-function newsportal_register_block_patterns()
-{
-    require get_template_directory() . '/patterns/home-layout-1.php';
-}
-add_action('init', 'newsportal_register_block_patterns');
-
-
 function integrate_assets(): void
 {
     wp_enqueue_style('main_css', get_theme_file_uri('style.css'), null, VERSION, "all");

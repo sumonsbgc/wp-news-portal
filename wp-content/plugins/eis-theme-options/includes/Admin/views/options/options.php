@@ -1,70 +1,11 @@
-<style>
-.grid-cols-3 {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 1rem;
+<?php
+if (isset($_GET['status']) && $_GET['status'] === 'success') {
+  echo '<div class="notice notice-success is-dismissible">
+            <p>Options saved successfully.</p>
+          </div>';
 }
 
-.input-group {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  margin-top: 0.625rem;
-  align-items: start;
-}
-
-.w-full {
-  width: 100%;
-}
-
-.flex {
-  display: flex;
-  gap: 1rem;
-}
-
-.justify-end {
-  justify-content: flex-end;
-}
-
-.resize {
-  resize: vertical;
-}
-
-.add-sports-news {
-  margin-top: 1rem;
-  background-color: #28a745;
-  border: none;
-  padding: 0.5rem 1rem;
-  color: white;
-  border-radius: 4px;
-  cursor: pointer;
-  font-weight: 500;
-  transition: background-color 0.2s ease;
-}
-
-.add-sports-news:hover {
-  background-color: #218838;
-  /* Darker green on hover */
-}
-
-.delete-sports-news {
-  padding: 0.5rem 1rem;
-  background-color: #dc3545;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-weight: 500;
-  transition: background-color 0.2s ease;
-}
-
-.delete-sports-news:hover {
-  background-color: #c82333;
-}
-</style>
-
-
-
+?>
 <div class="wrap">
   <h1 class="wp-heading-inline">Theme Options</h1>
   <form action="" method="post">
@@ -142,6 +83,7 @@
             <div>
               <input name="ytd_playlist_id[]" type="text" id="salat_routine" value="" class="regular-text" />
             </div>
+
             <div>
               <input name="ytd_playlist_id[]" type="text" id="salat_routine" value="" class="regular-text" />
             </div>
@@ -181,63 +123,3 @@
     <?php submit_button('Save Options', 'primary', 'submit_options',); ?>
   </form>
 </div>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  const container = document.getElementById('sports-container');
-  const addNewsBtn = document.getElementById('add-sports-news');
-  let rowCount = 1; // Start from 1 since we have initial row
-
-  // Add new field
-  addNewsBtn.addEventListener('click', function() {
-    const newRow = document.createElement('tr');
-    newRow.innerHTML = `
-            <div >
-                <div class="flex">
-                    <div class="input-group ">
-                        <label for="">Sports Name</label>
-                        <input type="text" class="regular-text" name="sports[${rowCount}][sports_name]" value="" style="border: 1px solid gray" />
-                    </div>
-                    <div class="input-group">
-                        <label for="">Sports News</label>
-                        <textarea name="sports[${rowCount}][sports_news]" id="" rows="2" class="regular-text resize"></textarea>
-                    </div>
-                </div>
-                <div class="flex ">
-                    <button type="button" class="delete-sports-news"> <span class="dashicons dashicons-dismiss"></span> Delete</button>
-                </div>
-            </div>
-        `;
-    container.appendChild(newRow);
-    rowCount++;
-
-    // Enable delete button on first row if there are multiple rows
-    if (container.children.length > 1) {
-      container.firstElementChild.querySelector('.delete-sports-news').disabled = false;
-    }
-  });
-
-  // Delete field (event delegation)
-  container.addEventListener('click', function(e) {
-    if (e.target.classList.contains('delete-sports-news')) {
-      const row = e.target.closest('tr');
-      if (row && container.children.length > 1) {
-        row.remove();
-
-        // Disable delete button on first row if only one row left
-        if (container.children.length === 1) {
-          container.firstElementChild.querySelector('.delete-sports-news').disabled = true;
-        }
-
-        // Re-index remaining rows
-        const rows = container.querySelectorAll('tr');
-        rows.forEach((row, index) => {
-          row.querySelector('input').name = `sports[${index}][sports_name]`;
-          row.querySelector('textarea').name = `sports[${index}][sports_news]`;
-        });
-        rowCount = rows.length;
-      }
-    }
-  });
-});
-</script>
