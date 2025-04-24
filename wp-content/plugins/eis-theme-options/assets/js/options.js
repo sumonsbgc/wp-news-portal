@@ -66,7 +66,7 @@ document.addEventListener("DOMContentLoaded", function () {
 				<div class="margin-youtube flex">
                     <input name="ytd_playlist_id[]" type="text" id="salat_routine" value="" class="regular-text" />
                     <div class="flex ">
-                    <button type="button" class="delete-sports-news"> <span class="dashicons dashicons-dismiss"></span> Delete</button>
+                    <button type="button" class="delete-sports-news"> <span class="dashicons dashicons-dismiss"></span></button>
                 </div>
                 </div>
 	`;
