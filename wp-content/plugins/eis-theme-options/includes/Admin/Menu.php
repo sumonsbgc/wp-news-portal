@@ -16,7 +16,7 @@ class Menu
         $parent_slug = 'dp-theme-options';
         $capability = 'manage_options';
 
-        add_menu_page(
+        $hook = add_menu_page(
             __('DP Theme Options', 'eis'),
             __('Theme Options', 'eis'),
             $capability,
@@ -27,6 +27,7 @@ class Menu
 
         add_submenu_page($parent_slug, __('Add Options', 'eis'), __('Add Options', 'eis'), $capability, $parent_slug, [$this, 'theme_options_page']);
         add_submenu_page($parent_slug, __('Ad Section', 'eis'), __('Ad Section', 'eis'), $capability, 'dp-ad-section', [$this, 'ad_section_page']);
+        add_action("admin_head-" . $hook, [$this, 'enqueue_assets']);
     }
 
     public function theme_options_page(): void
@@ -38,5 +39,11 @@ class Menu
     public function ad_section_page(): void
     {
         echo 'Ad Section Page';
+    }
+
+    public function enqueue_assets(): void
+    {
+        wp_enqueue_style('eis-dp-options-style');
+        wp_enqueue_script('eis-dp-options-script');
     }
 }

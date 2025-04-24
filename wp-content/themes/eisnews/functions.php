@@ -112,9 +112,9 @@ function delete_cache($post_id)
             case 'finance-trade':
                 wp_cache_delete('finance-trade');
                 break;
-                //            case 'finance-trade':
-                //                wp_cache_delete('finance-trade');
-                //                break;
+            //            case 'finance-trade':
+            //                wp_cache_delete('finance-trade');
+            //                break;
             case 'zila-upazila-gram':
                 wp_cache_delete('zila-upazila-gram');
                 break;
@@ -177,6 +177,6 @@ function dpkone_pagination($query): void
     ]);
 
     $links = str_replace('<li>', '<li style="display: inline-block;">', $links);
-    $links = str_replace("<ul class='page-numbers'>", "<ul class='pagination my-3'>", $links);
+    $links = str_replace("<ul class='page-numbers'>", "<ul class='my-3 pagination'>", $links);
     echo $links;
 }

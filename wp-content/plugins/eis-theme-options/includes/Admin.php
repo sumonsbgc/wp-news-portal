@@ -2,7 +2,7 @@
 
 namespace Eis\ThemeOption;
 
-use Eis\ThemeOption\Admin\ThemeOptions;
+use \Eis\ThemeOption\Admin\ThemeOptions;
 
 class Admin
 {
