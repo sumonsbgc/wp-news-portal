@@ -90,6 +90,7 @@ if (isset($_GET['status']) && $_GET['status'] === 'success') {
                 <tr>
                     <th><label><?php _e('ই-পেপার', 'eis'); ?></label></th>
                     <td>
+                        
                         <input type="file" name="epaper" />
                     </td>
                 </tr>
