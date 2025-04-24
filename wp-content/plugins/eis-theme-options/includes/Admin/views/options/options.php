@@ -90,8 +90,14 @@ if (isset($_GET['status']) && $_GET['status'] === 'success') {
                 <tr>
                     <th><label><?php _e('ই-পেপার', 'eis'); ?></label></th>
                     <td>
-                        
-                        <input type="file" name="epaper" />
+                    <div class="image-upload-wrapper">
+                        <div class="image-preview" id="imagePreview"></div>
+
+                        <input type="file" id="imageInput" accept="image/*" hidden >
+                        <button type="button" id="uploadBtn" class="add-sports-news">Upload Image</button>
+                        <button type="button" id="removeBtn" class="delete-sports-news" style="display: none;">Remove</button>
+                    </div>
+                        <!-- <input type="file" name="epaper" /> -->
                     </td>
                 </tr>
                 <tr>

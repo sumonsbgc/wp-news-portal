@@ -5,6 +5,11 @@ document.addEventListener("DOMContentLoaded", function () {
     "youtube-playlist-container"
   );
   const addYoutubePlaylistBtn = document.getElementById("add-youtube-playlist");
+  const imageInput = document.getElementById("imageInput");
+  const uploadBtn = document.getElementById("uploadBtn");
+  const removeBtn = document.getElementById("removeBtn");
+  const imagePreview = document.getElementById("imagePreview");
+
   let rowCount = 1;
   addNewsBtn.addEventListener("click", function () {
     const newRow = document.createElement("tr");
@@ -98,5 +103,27 @@ document.addEventListener("DOMContentLoaded", function () {
         rowCount = row.length;
       }
     }
+  });
+
+  uploadBtn.addEventListener("click", () => {
+    imageInput.click();
+  });
+
+  imageInput.addEventListener("change", () => {
+    const file = imageInput.files[0];
+    if (file && file.type.startsWith("image/")) {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        imagePreview.innerHTML = `<img src="${e.target.result}" class="preview-image" />`;
+        removeBtn.style.display = "inline-block";
+      };
+      reader.readAsDataURL(file);
+    }
+  });
+
+  removeBtn.addEventListener("click", () => {
+    imageInput.value = "";
+    imagePreview.innerHTML = "";
+    removeBtn.style.display = "none";
   });
 });
