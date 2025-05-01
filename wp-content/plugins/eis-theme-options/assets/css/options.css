@@ -44,14 +44,13 @@
 
 .add-sports-news:hover {
   background-color: #218838;
-  /* Darker green on hover */
 }
 
 .delete-sports-news {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0.75rem;
+  padding: 0.5rem 1rem;
   background-color: #dc3545;
   color: white;
   border: none;
@@ -68,7 +67,30 @@
 
 .margin-youtube {
   margin-bottom: 1rem;
+  margin-top: 1rem;
 }
 .text-xl{
   font-size: 1.5rem;
 }
+
+.border {
+  border: 2px solid tomato;
+}
+
+.image-upload-wrapper {
+  margin-top: 20px;
+  max-width: 300px;
+}
+
+.image-preview {
+  margin-bottom: 10px;
+}
+
+.preview-image {
+  max-width: 100%;
+  max-height: 200px;
+  border: 1px solid #ddd;
+  padding: 2px;
+  background: #fff;
+}
+
