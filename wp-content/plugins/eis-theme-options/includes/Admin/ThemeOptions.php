@@ -59,6 +59,9 @@ class ThemeOptions
       wp_die('Are you cheating');
     }
 
+    print_r($_FILES['epaper']);
+
+    die('Form submitted!');
     $this->dp_save_all_theme_options($_POST);
     $redirect_url = admin_url('admin.php?page=dp-theme-options&status=success');
     wp_redirect($redirect_url);

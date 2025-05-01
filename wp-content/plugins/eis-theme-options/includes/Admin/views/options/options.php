@@ -9,7 +9,7 @@ if (isset($_GET['status']) && $_GET['status'] === 'success') {
 ?>
 <div class="wrap">
     <h1 class="wp-heading-inline">Theme Options</h1>
-    <form action="" method="post">
+    <form action="" method="post" enctype="multipart/form-data">
         <table class="form-table" role="presentation">
             <tbody>
                 <tr>
@@ -100,7 +100,8 @@ if (isset($_GET['status']) && $_GET['status'] === 'success') {
                             <div class="flex">
                                 <div class="input-group ">
                                     <label for="">Sports Name</label>
-                                    <input type="text" class="regular-text" name="sports[0][sports_name]" value="" style="border: 1px solid gray" />
+                                    <input type="text" class="regular-text" name="sports[0][sports_name]" value=""
+                                        style="border: 1px solid gray" />
                                 </div>
                                 <div class="input-group">
                                     <label for="">Sports News</label>
@@ -109,7 +110,8 @@ if (isset($_GET['status']) && $_GET['status'] === 'success') {
                             </div>
                         </div>
                         <div class="flex ">
-                            <button type="button" id="add-sports-news" class="add-sports-news"><span class="dashicons dashicons-plus-alt"></span> Add New Sports</button>
+                            <button type="button" id="add-sports-news" class="add-sports-news"><span
+                                    class="dashicons dashicons-plus-alt"></span> Add New Sports</button>
                         </div>
                     </td>
                 </tr>
