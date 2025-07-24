@@ -34,17 +34,22 @@ final class EIS_Theme_Options
     {
         $this->define_constants();
         register_activation_hook(__FILE__, [$this, 'activate']);
+        register_deactivation_hook(__FILE__, [$this, 'deactivate']);
         add_action('plugins_loaded', [$this, 'init_plugin']);
     }
 
     public function init_plugin(): void
     {
         new Eis\ThemeOption\Assets();
+
         if (is_admin()) {
             new Eis\ThemeOption\Admin();
         } else {
             new Eis\ThemeOption\Frontend();
         }
+
+        // Initialize helper functions for both admin and frontend
+        Eis\ThemeOption\OptionsHelper::getInstance();
     }
 
     public static function init(): EIS_Theme_Options
@@ -71,6 +76,13 @@ final class EIS_Theme_Options
     {
         $installer = new Eis\ThemeOption\Installer();
         $installer->run();
+    }
+
+    public function deactivate(): void
+    {
+        $deactivator = new Eis\ThemeOption\Deactivator();
+        // Set to true if you want to backup data before deactivation
+        $deactivator->run(true);
     }
 }
 

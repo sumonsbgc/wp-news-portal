@@ -34,12 +34,12 @@ function eis_news_section_title($title = "Category One", $section_class = null, 
 
 function eis_news_single_title(): string
 {
-    return sprintf(
-        '<div class="flex justify-between items-center border-b-2 border-primary mb-3">
+  return sprintf(
+    '<div class="flex justify-between items-center border-b-2 border-primary mb-3">
                   <span class="text-lg px-3 pt-2 pb-[5px] text-white bg-primary">%1$s</span>
                 </div>',
-        strtoupper(single_cat_title('', false)),
-    );
+    strtoupper(single_cat_title('', false)),
+  );
 }
 
 function eis_display_border($size = 2): void
@@ -56,7 +56,8 @@ function eis_section_title($template = null): void
   }
 }
 
-function eis_short_title(string $title, int $length): string {
+function eis_short_title(string $title, int $length): string
+{
   return substr($title, 0);
 }
 
@@ -80,7 +81,6 @@ function get_template_part_as_string(string $slug, string|null $name = null, arr
   return ob_get_clean();
 }
 
-#[NoReturn]
 function dd($args): void
 {
   echo "<pre>";
@@ -93,9 +93,8 @@ function get_svg_icon(string $name, int $size = 20): false|string
 {
   $icon_path = get_template_directory() . "/src/images/icons/{$name}.svg";
   if (file_exists($icon_path)) {
-      return file_get_contents($icon_path);
+    return file_get_contents($icon_path);
   } else {
     return '';
   };
 };
-

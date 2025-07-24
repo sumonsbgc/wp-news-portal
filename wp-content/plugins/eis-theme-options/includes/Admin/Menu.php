@@ -38,7 +38,10 @@ class Menu
 
     public function ad_section_page(): void
     {
-        echo 'Ad Section Page';
+        echo '<div class="wrap">
+                <h1>Ad Section Configuration</h1>
+                <p>This feature is coming soon. Configure your advertisement sections here.</p>
+              </div>';
     }
 
     public function enqueue_assets(): void
